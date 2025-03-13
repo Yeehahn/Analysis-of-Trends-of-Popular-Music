@@ -1,0 +1,1 @@
+All of your generated plots need to be saved here. It should contain only images.  
