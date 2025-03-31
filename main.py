@@ -6,5 +6,5 @@ You will do plot-related work such as joins, column filtering, pivots,
 small calculations and other simple organizational work. 
 '''
 
-df = pd.read_csv('raw_data\data_by_genres.csv')
+df = pd.read_csv('raw_data/artists.csv')
 print(len(df))
