@@ -114,7 +114,6 @@ def fill_artists(grammy_row, songs):
 
     if len(artist) > 0:
         grammy_row['artist'] = ', '.join(artist.iloc[0])
-        print(grammy_row['artist'])
 
     return grammy_row
 
@@ -133,7 +132,7 @@ def grammy_songs_characteristics():
                                right_on=['spotify_name', 'spotify_year'], how='inner')
     # These columns are just repeat of other the name and year column
     grammy_song = grammy_song.drop(['spotify_name', 'spotify_year'], axis=1)
-    grammy_song.to_csv('data_organized/grammy_song.csv', sep=',', index=False, encoding='utf-8')
+    grammy_song.to_csv('data_organized/grammy_song_char.csv', sep=',', index=False, encoding='utf-8')
 
 
 def clean_genres():
@@ -145,3 +144,14 @@ def clean_genres():
     genres = genres.drop(['mode', 'key'], axis=1)
     genres.to_csv('data_organized/genres.csv', sep=',', index=False, encoding='utf-8')
 
+
+def main():
+    create_artists_final()
+    clean_spotify_dataset()
+    clean_grammy()
+    grammy_songs_characteristics()
+    clean_genres()
+
+
+if __name__ == '__main__':
+    main()
