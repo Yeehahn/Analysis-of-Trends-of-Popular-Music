@@ -1,21 +1,25 @@
-import pandas as pd
-import ast
 '''
-This file is intended to do the following types of work:
-    * download data from APIs  
-    * screenscrape data from websites  
+Ryan Pascual, Yeehahn Wang-Liu
+Intermediate Data Programming Period 1
+Final Project
+This file does the following types of work:
     * reduce the size of large datasets to something more manageable  
     * clean data: reduce/rename columns, normalize strings, adjust values  
     * generate data through relatively complicated calculations
 '''
+import pandas as pd
+import ast
 
 
-def clean_artists():
+def preprocess_artists():
     '''
-    Decreases the amount of entries in the artists.csv
-    artists.csv is filled with artists who have very little followers and/or no associated genres
-    These artists give us little value to our research questions so should be removed.
-    Returns the cleaned artist df
+    Preprocesses artists.csv file by doing the following:
+    - Removes artists with less than 100,000 followers
+    - Removes artists with missing genre data
+    - Removes 'id' column, which provides no value
+    - Sorts artists by number of followers
+
+    Returns preprocessed DataFrame from artists.csv
     '''
     artists = pd.read_csv('raw_data/artists.csv')
     follower_filter = artists['followers'] > 100000
@@ -32,12 +36,15 @@ def clean_artists():
     return artists
 
 
-def find_artist_characteristics():
+def preprocess_artist_characteristics():
     '''
-    artists.csv does not tell us the characteristics of the artists music
-    so we need to find the artists characteristics using spotify_dataset and merge
-    all relveant columns to create a robust dataset
-    Returns the merged artist df
+    Preprocesses spotify_dataset.csv by doing the following:
+    - Filter dataset to relevant columns of musical characteristics
+    - Aggregate single artist songs
+    - Sort by popularity of artist
+    - Drop duplicates
+
+    Returns preprocessed DataFrame
     '''
     df = pd.read_csv('raw_data/spotify_dataset.csv')
 
@@ -47,25 +54,23 @@ def find_artist_characteristics():
     df = df.groupby('artists', as_index=False).mean()
     # Some songs have multiple artists but for clean data let's just agreggate single artist songs
     # This will make it easier when merging since the original artist dataset only has single artists
-    # For whatever reason the CSV is reading the list as a string so cleaning it up as a string
     df = df[df['artists'].apply(lambda x: ',' not in x)]
+    # Reformat string to make more readable
     df['artists'] = df['artists'].apply(lambda x: x[2: -2])
-    # Some artists have the same name so remove less popular artist for clean data
+    # Some artists have the same name so remove less popular duplicate
     df = df.sort_values(by='popularity')
     df = df.drop_duplicates('artists', keep='last')
     return df
 
 
-def create_artists_final():
+def merge_artists():
     '''
-    There is artists_char and artists
-    artists has genres and follower count
-    artists_char has the artist music characteristics
-    Merging them will create a complete dataset for artists
-    Saves the dataset to data_organized as artists.csv
+    Preprocesses artists.csv and spotify_dataset.csv
+    Merges both preprocessed datasets by artist
+    Saves to .csv file titled 'artists.csv' in data_organized folder
     '''
-    characteristics = find_artist_characteristics()
-    artists = clean_artists()
+    characteristics = preprocess_artist_characteristics()
+    artists = preprocess_artists()
 
     characteristics = characteristics.loc[:, :'tempo']
     artists_merged = artists.merge(characteristics, left_on='artist', right_on='artists', how='inner')
@@ -95,6 +100,7 @@ def create_final_spotify_dataset():
     Saves the dataset to data_organized as spotify_dataset.csv
     '''
     spotify_data = clean_spotify_dataset()
+    # Older songs need to be weighted more
     sufficiently_popular = (spotify_data['popularity'] - 0.4 * (spotify_data['year'] - 1920)) > 10
 
     spotify_data = spotify_data[sufficiently_popular]
@@ -169,7 +175,7 @@ def clean_genres():
 
 
 def main():
-    create_artists_final()
+    merge_artists()
     create_final_spotify_dataset()
     clean_grammy()
     grammy_songs_characteristics()
