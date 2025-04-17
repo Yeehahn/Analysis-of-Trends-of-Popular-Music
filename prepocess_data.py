@@ -145,5 +145,3 @@ def clean_genres():
     genres = genres.drop(['mode', 'key'], axis=1)
     genres.to_csv('data_organized/genres.csv', sep=',', index=False, encoding='utf-8')
 
-
-clean_genres()
