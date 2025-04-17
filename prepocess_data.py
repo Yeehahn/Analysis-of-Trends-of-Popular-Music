@@ -15,6 +15,7 @@ def clean_artists():
     Decreases the amount of entries in the artists.csv
     artists.csv is filled with artists who have very little followers and/or no associated genres
     These artists give us little value to our research questions so should be removed.
+    Returns the cleaned artist df
     '''
     artists = pd.read_csv('raw_data/artists.csv')
     follower_filter = artists['followers'] > 100000
@@ -36,6 +37,7 @@ def find_artist_characteristics():
     artists.csv does not tell us the characteristics of the artists music
     so we need to find the artists characteristics using spotify_dataset and merge
     all relveant columns to create a robust dataset
+    Returns the merged artist df
     '''
     df = pd.read_csv('raw_data/spotify_dataset.csv')
 
@@ -60,6 +62,7 @@ def create_artists_final():
     artists has genres and follower count
     artists_char has the artist music characteristics
     Merging them will create a complete dataset for artists
+    Saves the dataset to data_organized as artists.csv
     '''
     characteristics = find_artist_characteristics()
     artists = clean_artists()
@@ -73,6 +76,7 @@ def clean_spotify_dataset():
     '''
     The spotify_dataset is a very clean set of data
     Just need to clean up uncecesarry columns
+    Saves the dataset to raw_data as spotify_dataset_clean and returns the df
     '''
     spotify_data = pd.read_csv('raw_data/spotify_dataset.csv')
     # Maintain only relevant columns
@@ -80,6 +84,20 @@ def clean_spotify_dataset():
                                  'duration_ms', 'energy', 'instrumentalness', 'liveness', 'loudness', 
                                  'popularity', 'speechiness', 'tempo']]
 
+    spotify_data.to_csv('raw_data/spotify_dataset_clean.csv', sep=',', index=False, encoding='utf-8')
+    return spotify_data
+
+
+def create_final_spotify_dataset():
+    '''
+    Since the paper is looking for trends in popular music
+    The spotify_dataset is filtered to just songs that are considered "popular"
+    Saves the dataset to data_organized as spotify_dataset.csv
+    '''
+    spotify_data = clean_spotify_dataset()
+    sufficiently_popular = (spotify_data['popularity'] - 0.4 * (spotify_data['year'] - 1920)) > 10
+
+    spotify_data = spotify_data[sufficiently_popular]
     spotify_data.to_csv('data_organized/spotify_dataset.csv', sep=',', index=False, encoding='utf-8')
 
 
@@ -89,6 +107,7 @@ def clean_grammy():
     Removes those columns
     The artist column also has many missing artist names
     Fills in those names
+    Saves the dataset to data_organized as grammy.csv
     '''
     grammy = pd.read_csv('raw_data/grammy_award_data.csv')
     # The year that the grammys are marked in this dataset are 1 year early
@@ -104,6 +123,8 @@ def fill_artists(grammy_row, songs):
     '''
     Fills in the missing artist names if 
     there is a corresponding song in the spotify_dataset
+    Takes grammy_row (Pandas Series) and songs (Pandas DataFrame)
+    Returns grammy_row with filled in artist column
     '''
     song_name = grammy_row['nominee']
     release_year = grammy_row['year']
@@ -122,6 +143,7 @@ def grammy_songs_characteristics():
     '''
     Merges the spotify_dataset and the grammy dataset
     Now grammy song nominations have characteristics marked
+    Saves the dataset to data_organized as grammy_song_characteristics.csv
     '''
     grammy = pd.read_csv('data_organized/grammy.csv')
     grammy = grammy[['year', 'category', 'nominee', 'workers']]
@@ -139,6 +161,7 @@ def clean_genres():
     '''
     Removes unecesarry columns in data_by_genres.csv
     Otherwise the genres dataset is clean
+    Saves the dataset to data_organized as genres.csv
     '''
     genres = pd.read_csv('raw_data/data_by_genres.csv')
     genres = genres.drop(['mode', 'key'], axis=1)
@@ -147,7 +170,7 @@ def clean_genres():
 
 def main():
     create_artists_final()
-    clean_spotify_dataset()
+    create_final_spotify_dataset()
     clean_grammy()
     grammy_songs_characteristics()
     clean_genres()

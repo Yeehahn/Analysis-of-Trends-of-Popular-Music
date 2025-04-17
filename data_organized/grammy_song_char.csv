@@ -1,0 +1,127 @@
+year,category,nominee,workers,artists,valence,acousticness,danceability,duration_ms,energy,instrumentalness,liveness,loudness,popularity,speechiness,tempo
+2020,Best Pop Duo/Group Performance,Boyfriend,,['Selena Gomez'],0.346,0.218,0.8109999999999999,161188,0.512,0.0262,0.0768,-6.381,73,0.17,92.046
+2020,Best Music Film,Homecoming,"Beyoncé Knowles-Carter & Ed Burke, video directors; Steve Pamon & Erinn Williams, video producers",['Lil Uzi Vert'],0.353,0.000592,0.929,213885,0.563,0.0,0.244,-7.428,66,0.49,129.957
+2019,Best Pop Duo/Group Performance,Shallow,,"['Danielle Bradbery', 'Parker McCollum']",0.326,0.232,0.561,207747,0.6729999999999999,0.0,0.0829,-4.186,58,0.0278,95.989
+2019,Best Song Written For Visual Media,Shallow,"Lady Gaga, Mark Ronson, Anthony Rossomando & Andrew Wyatt, songwriters (Lady Gaga & Bradley Cooper)","['Danielle Bradbery', 'Parker McCollum']",0.326,0.232,0.561,207747,0.6729999999999999,0.0,0.0829,-4.186,58,0.0278,95.989
+2019,Best Alternative Music Album,Colors,"Beck & Greg Kurstin, producers; Julian Burg, Serban Ghenea, David Greenbaum, John Hanes, Greg Kurstin, Florian Lagatta, Cole M.G.N., Alex Pasco, Jesse Shatkin, Darrel Thorp & Cassidy Turbin, engineers/mixers",['Black Pumas'],0.56,0.0946,0.391,246587,0.6920000000000001,1.58e-05,0.191,-6.5429999999999975,58,0.0462,180.00799999999995
+2019,"Best Engineered Album, Non-Classical",Colors,"Julian Burg, Serban Ghenea, David “Elevator” Greenbaum, John Hanes, Beck Hansen, Greg Kurstin, Florian Lagatta, Cole M.G.N., Alex Pasco, Jesse Shatkin, Darrell Thorp & Cassidy Turbin, engineers; Chris Bellman, Tom Coyne, Emily Lazar & Randy Merrill, mastering engineers (Beck)",['Black Pumas'],0.56,0.0946,0.391,246587,0.6920000000000001,1.58e-05,0.191,-6.5429999999999975,58,0.0462,180.00799999999995
+2019,Best Country Duo/Group Performance,Tequila,,"['Juanes', 'Christian Nodal']",0.7040000000000001,0.226,0.757,159547,0.688,0.0,0.237,-4.546,71,0.112,155.994
+2018,Best Traditional R&B Performance,Redbone,,['Dontcry'],0.7070000000000001,0.7959999999999999,0.721,102176,0.163,0.623,0.105,-16.899,62,0.0999,85.05799999999998
+2017,Best Urban Contemporary Album,Lemonade,"Beyoncé, producer; Stuart White, engineer/mixer",['Tay-K'],0.228,0.104,0.7440000000000001,132000,0.385,2.43e-05,0.124,-8.129,63,0.602,160.033
+2017,Best Country Solo Performance,My Church,,['Maren Morris'],0.664,0.243,0.517,197931,0.743,3.36e-06,0.107,-4.336,68,0.0363,76.979
+2016,Best Children's Album,Home,"Dominic Fallacaro, producer",['Chris Tomlin'],0.461,0.0363,0.468,219720,0.7859999999999999,0.0,0.31,-2.757,54,0.0334,84.992
+2016,Best Music Video,Bad Blood,"Joseph Kahn, video director; Ron Mohrhoff, video producer",['Nao'],0.378,0.639,0.494,240627,0.412,4.46e-06,0.0631,-5.687,58,0.133,113.108
+2015,Best Urban Contemporary Album,Girl,"Pharrell Williams, producer; Andrew Coleman, Mick Guzauski & Mike Larson, engineers/mixers",['Jukebox The Ghost'],0.841,0.479,0.605,213787,0.615,0.0,0.1369999999999999,-5.617000000000001,57,0.0474,172.21099999999996
+2014,Best Rock Performance,Radioactive,,"['Imagine Dragons', 'Kendrick Lamar']",0.278,0.0407,0.483,276040,0.894,0.0,0.282,-3.9,71,0.223,139.858
+2014,Best Rock Performance,Radioactive,,"['Pentatonix', 'Lindsey Stirling']",0.464,0.49,0.505,226440,0.594,0.0,0.298,-7.642,62,0.0695,134.99
+2013,Best Country Duo/Group Performance,Pontoon,,['Little Big Town'],0.867,0.413,0.721,212320,0.8190000000000001,0.0,0.196,-5.715,65,0.0269,96.02
+2012,Best Pop Solo Performance,Someone Like You,,['Boyce Avenue'],0.263,0.614,0.439,276147,0.207,0.0,0.187,-9.573,58,0.0296,136.513
+2012,Best Instrumental Arrangement,Rhapsody In Blue,"Gordon L. Goodwin, arranger (Gordon Goodwin's Big Phat Band)","['George Gershwin', 'Benjamin Grosvenor', 'Royal Liverpool Philharmonic Orchestra', 'James Judd']",0.115,0.976,0.309,890000,0.258,0.69,0.0924,-15.327,53,0.0459,74.568
+2011,Best Female Pop Vocal Performance,Bad Romance,,['Halestorm'],0.682,0.0128,0.545,248400,0.927,2.33e-06,0.3670000000000001,-4.7360000000000015,65,0.0706,124.061
+2011,Best Short Form Music Video,Bad Romance,"Francis Lawrence, video director; Kathy Angstadt, Nicole Ehrlich & Heather Heller, video producers",['Halestorm'],0.682,0.0128,0.545,248400,0.927,2.33e-06,0.3670000000000001,-4.7360000000000015,65,0.0706,124.061
+2011,Best Male Pop Vocal Performance,Just The Way You Are,,['Pierce The Veil'],0.344,0.000878,0.45,223347,0.907,0.0,0.256,-3.73,52,0.073,108.135
+2011,Best R&B Song,Shine,"John Legend, songwriter (John Legend & The Roots)",['Benjamin Francis Leftwich'],0.631,0.64,0.7140000000000001,182613,0.5329999999999999,1.7e-06,0.162,-10.405,52,0.0293,118.107
+2010,Best Rap/Sung Collaboration,Run This Town,,"['JAY-Z', 'Rihanna', 'Kanye West']",0.428,0.3229999999999999,0.591,268013,0.921,0.0,0.302,-1.787,52,0.313,86.80799999999998
+2010,Best Rap Song,Run This Town,"Jeff Bhasker, Shawn Carter, Robyn Fenty, Kanye West & Ernest Wilson, songwriters (Jay-Z, Rihanna & Kanye West)","['JAY-Z', 'Rihanna', 'Kanye West']",0.428,0.3229999999999999,0.591,268013,0.921,0.0,0.302,-1.787,52,0.313,86.80799999999998
+2010,Best Country Collaboration With Vocals,I Told You So,,['Randy Travis'],0.225,0.349,0.633,219947,0.325,0.0,0.114,-9.05,49,0.0268,79.079
+2010,"Best Score Soundtrack Album For Motion Picture, Television Or Other Visual Media",Up,"Michael Giacchino, composer; Dan Wallin, engineer/mixer (Various Artists)",['Justin Bieber'],0.589,0.084,0.711,234933,0.7170000000000001,0.0,0.09,-4.317,54,0.0396,125.949
+2009,Best Traditional Gospel Album,Down In New Orleans,"Chris Goldsmith, producer; Jimmy Hoyson, engineer/mixer",['Anika Noni Rose'],0.428,0.56,0.615,146693,0.475,0.0,0.252,-5.6560000000000015,46,0.0295,137.694
+2008,Record Of The Year,Rehab,"Mark Ronson, producer; Tom Elmhirst, Samuel ""Vaughan"" Merrick, Dom Morley, Mark Ronson & Gabriel Roth, engineers/mixers",['Rihanna'],0.397,0.00321,0.583,294720,0.792,4.92e-05,0.315,-5.894,66,0.0533,80.055
+2008,Song Of The Year,Rehab,"Amy Winehouse, songwriter (Amy Winehouse)",['Rihanna'],0.397,0.00321,0.583,294720,0.792,4.92e-05,0.315,-5.894,66,0.0533,80.055
+2008,Best Female Pop Vocal Performance,Rehab,,['Rihanna'],0.397,0.00321,0.583,294720,0.792,4.92e-05,0.315,-5.894,66,0.0533,80.055
+2008,Best Female R&B Vocal Performance,No One,,['Maoli'],0.8490000000000001,0.603,0.6409999999999999,270613,0.5,0.0,0.188,-8.816,48,0.0418,79.922
+2008,Best R&B Song,No One,"Kerry ""Krucial"" Brothers, Dirty Harry & Alicia Keys, songwriters (Alicia Keys)",['Maoli'],0.8490000000000001,0.603,0.6409999999999999,270613,0.5,0.0,0.188,-8.816,48,0.0418,79.922
+2008,Best Rap/Sung Collaboration,Umbrella,,"['Rihanna', 'JAY-Z']",0.575,0.00864,0.583,275987,0.8290000000000001,0.0,0.0426,-4.603,81,0.134,174.028
+2006,Best Female R&B Vocal Performance,We Belong Together,,['Ritchie Valens'],0.768,0.872,0.684,116627,0.247,0.000166,0.113,-13.71,52,0.0281,106.522
+2006,Best R&B Song,We Belong Together,"Johnta Austin, Mariah Carey, Jermaine Dupri & Manuel Seal, Jr., songwriters (Mariah Carey)",['Ritchie Valens'],0.768,0.872,0.684,116627,0.247,0.000166,0.113,-13.71,52,0.0281,106.522
+2006,Best Country Song,Bless The Broken Road,"Bobby Boyd, Jeff Hanna & Marcus Hummon, songwriters (Rascal Flatts)","['Selah', 'Melodie Crittenden']",0.192,0.718,0.269,250520,0.263,0.0,0.125,-9.368,53,0.0321,83.445
+2005,Record Of The Year,Here We Go Again,"John R. Burk, producer; Mark Fleming, Terry Howard & Al Schmitt, engineers/mixers",['Paramore'],0.544,7.020000000000001e-05,0.508,226293,0.848,0.0,0.132,-5.267,53,0.0383,120.012
+2005,Best Pop Collaboration With Vocals,Here We Go Again,,['Paramore'],0.544,7.020000000000001e-05,0.508,226293,0.848,0.0,0.132,-5.267,53,0.0383,120.012
+2004,Best Female Rock Vocal Performance,Trouble,,['Ray LaMontagne'],0.493,0.342,0.321,241547,0.425,0.000262,0.23,-12.73,59,0.0455,173.24
+2004,Best Traditional R&B Vocal Performance,Wonderful,,"['Ja Rule', 'R. Kelly', 'Ashanti']",0.758,0.277,0.6629999999999999,270507,0.777,0.0,0.0466,-4.954,61,0.109,92.68
+2004,Best R&B Song,Crazy In Love,"Rich Harrison, Jay-Z & Beyoncé Knowles, songwriters (Beyoncé Featuring Jay-Z)",['Eminem'],0.775,0.0221,0.679,242307,0.732,0.0,0.127,-6.5829999999999975,53,0.246,80.003
+2004,Best Rap/Sung Collaboration,Crazy In Love,,['Eminem'],0.775,0.0221,0.679,242307,0.732,0.0,0.127,-6.5829999999999975,53,0.246,80.003
+2003,Record Of The Year,Don't Know Why,"Norah Jones, Arif Mardin & Jay Newland, producers; Jay Newland, engineer/mixer",['Pat Metheny'],0.198,0.875,0.3670000000000001,187787,0.23,0.866,0.106,-16.453,48,0.0418,204.883
+2003,Song Of The Year,Don't Know Why,"Jesse Harris, songwriter (Norah Jones)",['Pat Metheny'],0.198,0.875,0.3670000000000001,187787,0.23,0.866,0.106,-16.453,48,0.0418,204.883
+2003,Best Female Pop Vocal Performance,Don't Know Why,,['Pat Metheny'],0.198,0.875,0.3670000000000001,187787,0.23,0.866,0.106,-16.453,48,0.0418,204.883
+2003,Best Country Album,Home,"Dixie Chicks & Lloyd Maines, producers; Gary Paczosa, engineer/mixer",['Three Days Grace'],0.606,2.64e-05,0.366,260680,0.847,0.0,0.228,-5.216,50,0.035,166.17
+2003,Best Recording Package,Home,"Kevin Reagan, art director (Dixie Chicks)",['Three Days Grace'],0.606,2.64e-05,0.366,260680,0.847,0.0,0.228,-5.216,50,0.035,166.17
+2003,Best Traditional Soul Gospel Album,Higher Ground,"John Chelew, producer; Jimmy Hoyson, engineer/mixer",['Red Hot Chili Peppers'],0.404,0.00224,0.485,203453,0.968,0.248,0.0781,-8.184,46,0.11,140.57299999999998
+2001,Best Traditional Pop Vocal Album,Both Sides Now,"Larry Klein & Joni Mitchell, producers; Geoff Foster & Allen Sides, engineers/mixers",['Judy Collins'],0.295,0.413,0.352,195840,0.3,0.0,0.1,-9.282,47,0.0301,58.68600000000001
+2001,Best Instrumental Arrangement Accompanying A Vocalist(s),Both Sides Now,"Vincent Mendoza, arranger (Joni Mitchell)",['Judy Collins'],0.295,0.413,0.352,195840,0.3,0.0,0.1,-9.282,47,0.0301,58.68600000000001
+2001,Best Female Country Vocal Performance,Breathe,,"['Télépopmusik', 'Angela McCluskey']",0.616,0.385,0.684,282240,0.684,0.29,0.106,-13.337,62,0.0418,113.988
+2001,Best Country Album,Breathe,"Byron Gallimore & Faith Hill, producers; Julian King & Mike Shipley, engineers/mixers","['Télépopmusik', 'Angela McCluskey']",0.616,0.385,0.684,282240,0.684,0.29,0.106,-13.337,62,0.0418,113.988
+2001,Best Contemporary Folk Album,Red Dirt Girl,"Malcolm Burn, producer; Malcolm Burn & Jim Watts, engineers/mixers",['Emmylou Harris'],0.326,0.408,0.338,245203,0.447,0.0,0.402,-11.091,54,0.0411,79.005
+2001,Best Recording Package,Music,"Kevin Reagan, art director (Madonna)","['Erick Sermon', 'Marvin Gaye']",0.884,0.187,0.897,223133,0.466,1.35e-06,0.0757,-9.053,57,0.203,100.01
+2000,Best Male Rock Vocal Performance,American Woman,,['Lenny Kravitz'],0.6,0.0243,0.669,261707,0.698,0.0,0.0782,-7.971,51,0.0713,83.98700000000002
+1999,Best Female R&B Vocal Performance,Doo Wop (That Thing),,['Ms. Lauryn Hill'],0.642,0.0074099999999999,0.795,241400,0.551,0.0,0.259,-9.238,45,0.0657,99.917
+1999,Best Rhythm & Blues Song,Doo Wop (That Thing),"Lauryn Hill, songwriter (Lauryn Hill)",['Ms. Lauryn Hill'],0.642,0.0074099999999999,0.795,241400,0.551,0.0,0.259,-9.238,45,0.0657,99.917
+1997,Record Of The Year,Change The World,"Babyface, producer",['The Offspring'],0.966,0.11,0.355,383507,0.261,3.08e-05,0.4370000000000001,-5.322,41,0.048,166.06599999999997
+1997,Song Of The Year,Change The World,"Gordon Kennedy, Wayne Kirkpatrick & Tommy Sims, songwriters (Eric Clapton AND ALSO Wynonna)",['The Offspring'],0.966,0.11,0.355,383507,0.261,3.08e-05,0.4370000000000001,-5.322,41,0.048,166.06599999999997
+1997,Best Male Pop Vocal Performance,Change The World,,['The Offspring'],0.966,0.11,0.355,383507,0.261,3.08e-05,0.4370000000000001,-5.322,41,0.048,166.06599999999997
+1995,Best Male Pop Vocal Performance,Can You Feel The Love Tonight,,['Elton John'],0.149,0.813,0.297,240000,0.364,0.000761,0.0976,-9.261,59,0.0305,122.598
+1995,Best Pop Instrumental Performance,Cruisin',,"[""D'Angelo""]",0.329,0.381,0.407,384667,0.525,0.000452,0.0816,-12.725,55,0.166,74.34
+1995,Best Instrumental Arrangement With Accompanying Vocals,Circle Of Life,"Lebo Morake & Hans Zimmer, arrangers (Carmen Twillie)",['Elton John'],0.157,0.283,0.276,290093,0.607,0.44,0.107,-8.089,52,0.0369,160.45
+1994,Best R&B Performance By A Duo Or Group With Vocal,No Ordinary Love,,['Sade'],0.71,0.421,0.622,440667,0.36,0.0112,0.0935,-12.671,40,0.0386,166.295
+1994,Best Rhythm & Blues Song,That's The Way Love Goes,"Janet Jackson, Jimmy Jam & Terry Lewis, songwriters (Janet Jackson)",['Norman Brown'],0.358,0.447,0.631,285467,0.635,0.718,0.0771,-10.649,52,0.0285,97.915
+1992,Best Rap Performance By A Duo Or Group,Summertime,,['Chet Baker'],0.58,0.931,0.588,253160,0.21,0.889,0.119,-17.337,43,0.0314,82.04700000000003
+1989,Best Album Notes,Crossroads,"Anthony DeCurtis, album notes writer (Eric Clapton)",['Tracy Chapman'],0.6,0.777,0.787,251493,0.255,0.00959,0.101,-14.733,56,0.0399,105.97
+1989,Best Historical Album,Crossroads,(Eric Clapton),['Tracy Chapman'],0.6,0.777,0.787,251493,0.255,0.00959,0.101,-14.733,56,0.0399,105.97
+1985,"Best Country Vocal Performance, Female",In My Dreams,,['Dokken'],0.5710000000000001,0.0217,0.552,260093,0.816,0.0,0.105,-9.821,45,0.0593,121.851
+1982,"Best Soul Gospel Performance, Contemporary",Don't Give Up,,['Barrington Levy'],0.8370000000000001,0.0551,0.83,198440,0.467,1.64e-05,0.0662,-10.936,48,0.0953,140.569
+1979,"Best R&B Vocal Performance, Female",Last Dance,,['Donna Summer'],0.5,0.121,0.605,296507,0.612,0.00236,0.22,-13.399,51,0.0439,125.37
+1979,Best Rhythm & Blues Song,Last Dance,"Paul Jabara, songwriter (Donna Summer)",['Donna Summer'],0.5,0.121,0.605,296507,0.612,0.00236,0.22,-13.399,51,0.0439,125.37
+1974,"Best Pop Vocal Performance, Male",You Are The Sunshine Of My Life,,['Frank Sinatra'],0.857,0.72,0.464,154467,0.392,0.0,0.1669999999999999,-11.317,33,0.0358,162.967
+1973,"Best Pop Vocal Performance, Male",Without You,,['The Doobie Brothers'],0.66,0.0823,0.485,298747,0.926,0.0558,0.208,-8.777000000000001,36,0.0443,132.631
+1972,"Best R&B Vocal Performance, Female",Bridge Over Troubled Water,,['Simon & Garfunkel'],0.261,0.795,0.276,293120,0.236,9.67e-05,0.366,-13.742,34,0.0299,83.611
+1972,Best Rhythm & Blues Song,Ain't No Sunshine,"Bill Withers, songwriter (Bill Withers)",['The Equatics'],0.341,0.353,0.446,213466,0.562,0.115,0.144,-11.967,46,0.0757,148.436
+1972,Best Rhythm & Blues Song,Ain't No Sunshine,"Bill Withers, songwriter (Bill Withers)",['Michael Jackson'],0.736,0.0281,0.529,253467,0.616,2.15e-05,0.0796,-9.903,34,0.0511,151.991
+1972,Best Rhythm & Blues Song,Ain't No Sunshine,"Bill Withers, songwriter (Bill Withers)",['Freddie King'],0.452,0.758,0.5760000000000001,200200,0.363,0.000147,0.0837,-14.487,37,0.0512,135.513
+1972,Best Spoken Word Recording,Desiderata,,['Jorge Lavat'],0.473,0.8809999999999999,0.381,223469,0.621,0.0,0.6779999999999999,-12.166,40,0.0849,85.93299999999998
+1971,"Best R&B Vocal Performance, Male",The Thrill Is Gone,,['B.B. King'],0.482,0.453,0.541,378907,0.438,0.00627,0.398,-10.854,37,0.209,94.786
+1971,"Best Country Vocal Performance, Female",Rose Garden,,['Lynn Anderson'],0.969,0.168,0.589,175867,0.501,0.0,0.0741,-11.665,61,0.031,131.064
+1971,"Best Country Vocal Performance, Male",For The Good Times,,['Andy Williams'],0.386,0.254,0.4,213467,0.406,0.0605,0.0972,-13.157,34,0.0276,96.603
+1971,Best Original Score Written For A Motion Picture Or A Television Special,Let It Be,"George Harrison, John Lennon, Paul McCartney & Ringo Starr, composers (The Beatles)",['John Denver'],0.364,0.857,0.522,218800,0.149,0.0,0.166,-12.609000000000002,49,0.0334,124.847
+1971,Best Original Score Written For A Motion Picture Or A Television Special,Let It Be,"George Harrison, John Lennon, Paul McCartney & Ringo Starr, composers (The Beatles)",['Bill Withers'],0.777,0.222,0.684,156773,0.52,0.0,0.0895,-11.251,44,0.032,118.782
+1970,Best Rhythm & Blues Song,Color Him Father,"Richard Spencer, songwriter (The Winstons)",['Linda Martell'],0.879,0.236,0.594,161947,0.581,0.0,0.234,-7.925,32,0.0258,94.419
+1970,Best Country Performance By A Duo Or Group With Vocal,MacArthur Park,,['Glen Campbell'],0.206,0.607,0.281,291227,0.428,0.028,0.105,-7.2810000000000015,34,0.0279,80.043
+1969,Record Of The Year,Mrs. Robinson,"Roy Halee & Simon And Garfunkel (Art Garfunkel & Paul Simon), producers","['Frank Sinatra', 'Don Costa']",0.89,0.485,0.456,176533,0.532,0.0,0.0605,-5.871,36,0.0361,156.562
+1969,Record Of The Year,Mrs. Robinson,"Roy Halee & Simon And Garfunkel (Art Garfunkel & Paul Simon), producers",['Paul Desmond'],0.6990000000000001,0.7809999999999999,0.541,160787,0.338,0.85,0.0825,-15.814,36,0.0477,100.376
+1969,Best Contemporary Pop Performance - Vocal Duo Or Group,Mrs. Robinson,,"['Frank Sinatra', 'Don Costa']",0.89,0.485,0.456,176533,0.532,0.0,0.0605,-5.871,36,0.0361,156.562
+1969,Best Contemporary Pop Performance - Vocal Duo Or Group,Mrs. Robinson,,['Paul Desmond'],0.6990000000000001,0.7809999999999999,0.541,160787,0.338,0.85,0.0825,-15.814,36,0.0477,100.376
+1969,"Best Contemporary Pop Vocal Performance, Male",Light My Fire,,['Stevie Wonder'],0.591,0.00719,0.517,220293,0.635,2.730000000000001e-05,0.11,-9.294,33,0.0299,102.868
+1969,"Best Contemporary Pop Vocal Performance, Male",Light My Fire,,['Astrud Gilberto'],0.485,0.575,0.623,175680,0.546,0.00572,0.0585,-9.683,32,0.0459,98.732
+1969,"Best Rhythm & Blues Performance By A Duo Or Group, Vocal Or Instrumental",Cloud Nine,,['The Temptations'],0.82,0.354,0.736,211693,0.45,0.0,0.0689,-14.104,43,0.0583,118.042
+1969,Best Folk Performance,Both Sides Now,,['Joni Mitchell'],0.329,0.912,0.623,274560,0.156,0.0,0.141,-15.098,59,0.0308,97.235
+1969,Best Folk Performance,Both Sides Now,,['Neil Diamond'],0.305,0.238,0.405,210440,0.247,0.000343,0.105,-17.695999999999994,30,0.0309,108.615
+1968,"Best Vocal Performance, Female",Ode To Billie Joe,,"['Nancy Wilson', 'Sweet']",0.612,0.7829999999999999,0.418,319067,0.531,2.11e-06,0.127,-11.441,44,0.1,94.066
+1968,Best Contemporary Female Solo Vocal Performance,Ode To Billie Joe,,"['Nancy Wilson', 'Sweet']",0.612,0.7829999999999999,0.418,319067,0.531,2.11e-06,0.127,-11.441,44,0.1,94.066
+1968,Best Arrangement Accompanying Vocalist(s) Or Instrumentalist(s),Ode To Billie Joe,"Jimmie Haskell, arranger (Bobbie Gentry)","['Nancy Wilson', 'Sweet']",0.612,0.7829999999999999,0.418,319067,0.531,2.11e-06,0.127,-11.441,44,0.1,94.066
+1968,"Best Vocal Performance, Male",By The Time I Get To Phoenix,,['Engelbert Humperdinck'],0.208,0.708,0.4270000000000001,188773,0.282,0.0,0.162,-13.652,30,0.0272,79.95
+1968,Best Contemporary Male Solo Vocal Performance,By The Time I Get To Phoenix,,['Engelbert Humperdinck'],0.208,0.708,0.4270000000000001,188773,0.282,0.0,0.162,-13.652,30,0.0272,79.95
+1968,Best Folk Performance,Gentle On My Mind,,"['Bobbie Gentry', 'Glen Campbell']",0.81,0.511,0.614,190707,0.509,0.0,0.113,-12.19,41,0.0328,112.697
+1968,Best Country & Western Recording,Gentle On My Mind,,"['Bobbie Gentry', 'Glen Campbell']",0.81,0.511,0.614,190707,0.509,0.0,0.113,-12.19,41,0.0328,112.697
+1968,"Best Country & Western Solo Vocal Performance, Male",Gentle On My Mind,,"['Bobbie Gentry', 'Glen Campbell']",0.81,0.511,0.614,190707,0.509,0.0,0.113,-12.19,41,0.0328,112.697
+1968,Best Country & Western Song,Gentle On My Mind,"John Hartford, songwriter (John Hartford)","['Bobbie Gentry', 'Glen Campbell']",0.81,0.511,0.614,190707,0.509,0.0,0.113,-12.19,41,0.0328,112.697
+1968,"Best Country & Western Performance Duet, Trio Or Group (Vocal Or Instrumental)",Jackson,,"['Nancy Sinatra', 'Lee Hazlewood']",0.936,0.308,0.601,169013,0.8540000000000001,0.0,0.0947,-5.8370000000000015,44,0.0656,141.395
+1967,Best Performance By A Vocal Group,A Man And A Woman,,['James Last'],0.488,0.818,0.389,162707,0.3,0.939,0.115,-14.656,45,0.0298,149.192
+1967,Best Contemporary (R&R) Solo Vocal Performance - Male Or Female,Eleanor Rigby,,['Wes Montgomery'],0.612,0.815,0.61,188000,0.417,0.5920000000000001,0.166,-12.675,31,0.0282,137.909
+1967,Best Contemporary (R&R) Solo Vocal Performance - Male Or Female,Eleanor Rigby,,['Joan Baez'],0.446,0.957,0.413,140533,0.134,0.0,0.0841,-16.023,35,0.0443,141.186
+1967,Best Country & Western Recording,Almost Persuaded,,['Tammy Wynette'],0.228,0.95,0.388,176000,0.163,0.000117,0.165,-16.047,29,0.0352,130.792
+1967,"Best Country & Western Vocal Performance, Male",Almost Persuaded,,['Tammy Wynette'],0.228,0.95,0.388,176000,0.163,0.000117,0.165,-16.047,29,0.0352,130.792
+1967,Best Country & Western Song,Almost Persuaded,"Billy Sherrill & Glenn Sutton, songwriters (David Houston)",['Tammy Wynette'],0.228,0.95,0.388,176000,0.163,0.000117,0.165,-16.047,29,0.0352,130.792
+1966,Best Instrumental Jazz Performance - Small Group Or Soloist With Small Group,"The ""In"" Crowd",,['The Mamas & The Papas'],0.546,0.6940000000000001,0.517,192493,0.53,0.0,0.206,-11.765,34,0.0347,118.561
+1966,Best Contemporary (R&R) Performance - Group (Vocal Or Instrumental),Flowers On The Wall,,['Nancy Sinatra'],0.8029999999999999,0.7240000000000001,0.6579999999999999,161097,0.409,0.0,0.0881,-10.319,32,0.0365,94.806
+1965,Best Country & Western Single,Dang Me,,['Roger Miller'],0.8759999999999999,0.8759999999999999,0.706,109067,0.465,1.15e-05,0.0536,-9.398,34,0.0437,93.215
+1965,Best Country & Western Vocal Performance - Male,Dang Me,,['Roger Miller'],0.8759999999999999,0.8759999999999999,0.706,109067,0.465,1.15e-05,0.0536,-9.398,34,0.0437,93.215
+1965,Best Country & Western Song,Dang Me,"Roger Miller, songwriter (Roger Miller)",['Roger Miller'],0.8759999999999999,0.8759999999999999,0.706,109067,0.465,1.15e-05,0.0536,-9.398,34,0.0437,93.215
+1964,Record Of The Year,Days Of Wine And Roses,,['Oscar Peterson Trio'],0.659,0.599,0.602,163160,0.297,0.0227,0.141,-14.329,40,0.0356,153.487
+1964,Record Of The Year,Days Of Wine And Roses,,['Frank Sinatra'],0.63,0.6559999999999999,0.66,135507,0.26,0.0,0.185,-13.853,37,0.0341,124.893
+1964,Song Of The Year,Days Of Wine And Roses,"Henry Mancini & Johnny Mercer, songwriters (Henry Mancini)",['Oscar Peterson Trio'],0.659,0.599,0.602,163160,0.297,0.0227,0.141,-14.329,40,0.0356,153.487
+1964,Song Of The Year,Days Of Wine And Roses,"Henry Mancini & Johnny Mercer, songwriters (Henry Mancini)",['Frank Sinatra'],0.63,0.6559999999999999,0.66,135507,0.26,0.0,0.185,-13.853,37,0.0341,124.893
+1964,Best Background Arrangement (Behind vocalist or instrumentalist),Days Of Wine And Roses,"Henry Mancini, arranger (Henry Mancini)",['Oscar Peterson Trio'],0.659,0.599,0.602,163160,0.297,0.0227,0.141,-14.329,40,0.0356,153.487
+1964,Best Background Arrangement (Behind vocalist or instrumentalist),Days Of Wine And Roses,"Henry Mancini, arranger (Henry Mancini)",['Frank Sinatra'],0.63,0.6559999999999999,0.66,135507,0.26,0.0,0.185,-13.853,37,0.0341,124.893
+1963,Best Instrumental Theme,A Taste Of Honey,"Ric Marlow & Bobby Scott, composers (Eddie Cano)",['Julie London'],0.25,0.8540000000000001,0.347,202347,0.3670000000000001,0.0,0.271,-11.152,29,0.0286,106.857
+1963,Best Jazz Performance - Soloist Or Small Group (Instrumental),Desafinado,,['Antônio Carlos Jobim'],0.402,0.5660000000000001,0.581,164133,0.187,0.417,0.12,-20.84800000000001,35,0.0321,139.065
+1963,Best Rock & Roll Recording,Alley Cat,,['Chet Atkins'],0.615,0.8340000000000001,0.88,140773,0.304,0.9,0.0756,-13.821,28,0.0483,119.265
+1962,Best Rock & Roll Recording,Let's Twist Again,,['Chubby Checker'],0.976,0.017,0.64,143613,0.634,4.4e-06,0.0449,-9.202,41,0.0376,162.127
