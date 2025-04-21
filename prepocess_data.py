@@ -74,6 +74,7 @@ def merge_artists():
 
     characteristics = characteristics.loc[:, :'tempo']
     artists_merged = artists.merge(characteristics, left_on='artist', right_on='artists', how='inner')
+    artists_merged = multiply_characteristics_100(artists_merged)
     artists_merged.to_csv('data_organized/artists.csv', sep=',', index=False, encoding='utf-8')
 
 
@@ -104,6 +105,7 @@ def create_final_spotify_dataset():
     sufficiently_popular = (spotify_data['popularity'] - 0.4 * (spotify_data['year'] - 1920)) > 10
 
     spotify_data = spotify_data[sufficiently_popular]
+    spotify_data = multiply_characteristics_100(spotify_data)
     spotify_data.to_csv('data_organized/spotify_dataset.csv', sep=',', index=False, encoding='utf-8')
 
 
@@ -118,11 +120,11 @@ def clean_grammy():
     grammy = pd.read_csv('raw_data/grammy_award_data.csv')
     # The year that the grammys are marked in this dataset are 1 year early
     grammy['year'] = grammy['year'] + 1
-    grammy = grammy[['year', 'category', 'nominee', 'artist', 'workers']]
+    grammy = grammy[['year', 'category', 'artist', 'workers', 'nominee', 'winner']]
 
     songs = pd.read_csv('data_organized/spotify_dataset.csv', converters={'artists': ast.literal_eval})
     grammy = grammy.apply(lambda row: fill_artists(row, songs), axis=1)
-    grammy.to_csv('data_organized/grammy.csv', sep=',', index=False, encoding='utf-8')
+    grammy.to_csv('data_organized/grammy_award_data.csv', sep=',', index=False, encoding='utf-8')
 
 
 def fill_artists(grammy_row, songs):
@@ -151,7 +153,7 @@ def grammy_songs_characteristics():
     Now grammy song nominations have characteristics marked
     Saves the dataset to data_organized as grammy_song_characteristics.csv
     '''
-    grammy = pd.read_csv('data_organized/grammy.csv')
+    grammy = pd.read_csv('data_organized/grammy_award_data.csv')
     grammy = grammy[['year', 'category', 'nominee', 'workers']]
     spotify_dataset = pd.read_csv('data_organized/spotify_dataset.csv')
     spotify_dataset = spotify_dataset.rename(columns={'name': 'spotify_name', 'year': 'spotify_year'})
@@ -160,6 +162,7 @@ def grammy_songs_characteristics():
                                right_on=['spotify_name', 'spotify_year'], how='inner')
     # These columns are just repeat of other the name and year column
     grammy_song = grammy_song.drop(['spotify_name', 'spotify_year'], axis=1)
+    grammy_song = multiply_characteristics_100(grammy_song)
     grammy_song.to_csv('data_organized/grammy_song_char.csv', sep=',', index=False, encoding='utf-8')
 
 
@@ -171,7 +174,19 @@ def clean_genres():
     '''
     genres = pd.read_csv('raw_data/data_by_genres.csv')
     genres = genres.drop(['mode', 'key'], axis=1)
-    genres.to_csv('data_organized/genres.csv', sep=',', index=False, encoding='utf-8')
+    genres = multiply_characteristics_100(genres)
+    genres.to_csv('data_organized/data_by_genres.csv', sep=',', index=False, encoding='utf-8')
+
+
+def multiply_characteristics_100(df):
+    '''
+    Visually a scale from 0.0 to 1.0 is not as appealing as a scale from 0 to 100
+    Scales all of the values that go from 0.0 to 1.0 to go from 0 to 100
+    '''
+    characteristics = ['acousticness', 'danceability', 'energy', 'instrumentalness', 'liveness', 'loudness',
+                       'speechiness', 'valence']
+    df[characteristics] = df[characteristics] * 100
+    return df
 
 
 def main():
@@ -180,6 +195,7 @@ def main():
     clean_grammy()
     grammy_songs_characteristics()
     clean_genres()
+    print('done')
 
 
 if __name__ == '__main__':
