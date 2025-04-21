@@ -1,6 +1,7 @@
 This will contain data that is small enough for consumption and ready to be plotted. If the raw data from the data sources is dirty or too big for quick and repeated consumption, you need to reduce, normalize and organize the data first. Store the raw data in the raw_data folder. After you've cleaned and organized it, save the processed data into this folder. However, if the raw data is clean and small enough, and it does not need any preprocesssing, you can store the raw data here.  
 
 **Sources for data:**
+
 **artist.csv**: https://www.kaggle.com/datasets/yamaerenay/spotify-dataset-1921-2020-160k-tracks?resource=download & https://www.kaggle.com/datasets/yamaerenay/spotify-dataset-19212020-600k-tracks
 
 **data_by_genres.csv**:  https://www.kaggle.com/datasets/yamaerenay/spotify-dataset-1921-2020-160k-tracks?select=data_by_genres.csv
@@ -12,6 +13,7 @@ This will contain data that is small enough for consumption and ready to be plot
 **spotify_dataset.csv**: https://www.kaggle.com/datasets/yamaerenay/spotify-dataset-1921-2020-160k-tracks?resource=download
 
 **Desriptions:**
+
 **artist.csv**: Each entry in this dataset represents a popular artist on Spotify. It contains general information on the artist, what genre of music the artist creates, and what the characteristics of the artist’s music are. 
 
 **data_by_genres.csv**:  Each entry in this dataset represents a genre of music and all of the ML generated characteristics. Overall, this is the exact same as the raw dataset but two unnecessary columns were removed. 
