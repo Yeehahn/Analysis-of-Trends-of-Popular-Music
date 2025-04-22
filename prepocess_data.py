@@ -134,15 +134,18 @@ def fill_artists(grammy_row, songs):
     Takes grammy_row (Pandas Series) and songs (Pandas DataFrame)
     Returns grammy_row with filled in artist column
     '''
-    song_name = grammy_row['nominee']
+    # Sometimes the name is a series of numbers
+    song_name = str(grammy_row['nominee'])
     release_year = grammy_row['year']
-    song_name_same = songs['name'] == song_name
+    # Make it case insensitive
+    song_name_same = songs['name'].str.lower() == song_name.lower()
     # Grammy selects from songs in a time frame that is within a year of the actual grammy
-    similar_release = abs(songs['year'] - release_year) <= 1
+    # Make it two just to be sure the song is grabbed
+    similar_release = abs(songs['year'] - release_year) <= 2
     artist = songs['artists'][song_name_same & similar_release]
 
     if len(artist) > 0:
-        grammy_row['artist'] = ', '.join(artist.iloc[0])
+        grammy_row['artist'] = '& '.join(artist.iloc[0])
 
     return grammy_row
 
@@ -154,14 +157,28 @@ def grammy_songs_characteristics():
     Saves the dataset to data_organized as grammy_song_characteristics.csv
     '''
     grammy = pd.read_csv('data_organized/grammy_award_data.csv')
-    grammy = grammy[['year', 'category', 'nominee', 'workers']]
-    spotify_dataset = pd.read_csv('data_organized/spotify_dataset.csv')
-    spotify_dataset = spotify_dataset.rename(columns={'name': 'spotify_name', 'year': 'spotify_year'})
+    grammy = grammy[['category', 'nominee', 'artist', 'workers']]
+    no_records_albums = grammy['category'].apply(lambda x: 'Album' not in x and 
+                                                 'Record' not in x)
+    grammy = grammy[no_records_albums]
+    # Songs should be released 1 year before from the actual Grammy awards
 
-    grammy_song = grammy.merge(spotify_dataset, left_on=['nominee', 'year'], 
-                               right_on=['spotify_name', 'spotify_year'], how='inner')
+    spotify_dataset = pd.read_csv('data_organized/spotify_dataset.csv', 
+                                  converters={'artists': ast.literal_eval})
+    # Have to try and make the names the same as the way the grammy dataset has it
+    spotify_dataset['artists'] = spotify_dataset['artists'].apply(lambda x: '& '.join(x))
+    # Normalizing names
+    grammy['nominee_clean'] = grammy['nominee'].str.lower().str.strip()
+    grammy['artist_clean'] = grammy['artist'].str.lower().str.strip()
+    spotify_dataset['spotify_name_clean'] = spotify_dataset['name'].str.lower().str.strip()
+    spotify_dataset['spotify_artist_clean'] = spotify_dataset['artists'].str.lower().str.strip()
+
+    grammy_song = grammy.merge(spotify_dataset, left_on=['nominee_clean', 'artist_clean'], 
+                               right_on=['spotify_name_clean', 'spotify_artist_clean'], how='inner')
     # These columns are just repeat of other the name and year column
-    grammy_song = grammy_song.drop(['spotify_name', 'spotify_year'], axis=1)
+    grammy_song = grammy_song.drop(['spotify_name_clean', 'spotify_artist_clean', 'artist',
+                                    'artist_clean', 'nominee_clean'], 
+                                   axis=1)
     grammy_song = multiply_characteristics_100(grammy_song)
     grammy_song.to_csv('data_organized/grammy_song_char.csv', sep=',', index=False, encoding='utf-8')
 
