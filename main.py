@@ -7,6 +7,7 @@ small calculations and other simple organizational work.
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def create_characteristic_vs_time():
@@ -33,9 +34,7 @@ def create_characteristic_vs_time():
 
 def create_box_characteristic_vs_time():
     sns.set()
-    spot_df = pd.read_csv('data_organized/spotify_dataset.csv')
-    spot_df = spot_df.drop(['name', 'artists'], axis=1)
-    spot_df['decade'] = spot_df['year'].floordiv(10).mul(10)
+    spot_df = load_spot_df_for_char()
     characteristic_100_range = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                                 'liveness', 'speechiness', 'valence']
     characteristic_not_100_range = ['duration_ms', 'loudness', 'tempo']
@@ -69,9 +68,76 @@ def plot_all_characteristic_of_music():
                        'liveness', 'speechiness', 'valence']]
 
 
+def plot_characteristic_histogram():
+    sns.set()
+    spot_df = load_spot_df_for_char()
+    spot_df = spot_df[(spot_df['decade'] >= 1990) & (spot_df['decade'] < 2020)]
+    characteristic_100_range = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                                'liveness', 'speechiness', 'valence']
+    decade_char = spot_df.groupby('decade')[characteristic_100_range].mean()
+
+    x_axis = np.arange(3)
+    bar_width = 0.1
+    fig, ax = plt.subplots(figsize=(14, 6))
+
+    for i, char in enumerate(characteristic_100_range):
+        ax.bar(x_axis + i * bar_width, decade_char[char], bar_width, label=char)
+
+    # X-axis labels
+    # Have to manually set the labels to be decades instead of the characteristics
+    ax.set_xticks(x_axis + bar_width * len(characteristic_100_range) / 2)
+    ax.set_xticklabels([1990, 2000, 2010])
+
+    plt.ylabel('Average Value of Characteristic')
+    plt.title('Characteristics of Popular Music by Decade')
+    plt.legend()
+    plt.savefig('plots/Q_2/characteristic_histogram', bbox_inches='tight')
+
+
+def plot_difference_characteristic_histogram():
+    spot_df = load_spot_df_for_char()
+    spot_df = spot_df[(spot_df['decade'] >= 1990) & (spot_df['decade'] < 2020)]
+    characteristic_100_range = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                                'liveness', 'speechiness', 'valence']
+    spot_tot_df = pd.read_csv('raw_data/spotify_dataset_clean.csv')
+    spot_tot_df = spot_tot_df.drop(['name', 'artists'], axis=1)
+    spot_tot_df['decade'] = spot_tot_df['year'].floordiv(10).mul(10)
+    spot_tot_df = spot_tot_df[(spot_tot_df['decade'] >= 1990) & (spot_tot_df['decade'] < 2020)]
+
+    decade_pop_char = spot_df.groupby('decade')[characteristic_100_range].mean()
+    decade_tot_char = spot_tot_df.groupby('decade')[characteristic_100_range].mean() * 100
+    decade_char = decade_pop_char - decade_tot_char
+
+    x_axis = np.arange(3)
+    bar_width = 0.1
+    fig, ax = plt.subplots(figsize=(14, 6))
+
+    for i, char in enumerate(characteristic_100_range):
+        ax.bar(x_axis + i * bar_width, decade_char[char], bar_width, label=char)
+
+    # X-axis labels
+    # Have to manually set the labels to be decades instead of the characteristics
+    ax.set_xticks(x_axis + bar_width * len(characteristic_100_range) / 2)
+    ax.set_xticklabels([1990, 2000, 2010])
+
+    plt.ylabel('Average Difference Value of Characteristic')
+    plt.title('Characteristics of Popular - All Music by Decade')
+    plt.legend()
+    plt.savefig('plots/Q_2/characteristic_difference_histogram', bbox_inches='tight')
+
+
+def load_spot_df_for_char():
+    spot_df = pd.read_csv('data_organized/spotify_dataset.csv')
+    spot_df = spot_df.drop(['name', 'artists'], axis=1)
+    spot_df['decade'] = spot_df['year'].floordiv(10).mul(10)
+    return spot_df
+
+
 def main():
     # create_characteristic_vs_time()
-    create_box_characteristic_vs_time()
+    # create_box_characteristic_vs_time()
+    plot_characteristic_histogram()
+    plot_difference_characteristic_histogram()
 
 
 if __name__ == '__main__':
