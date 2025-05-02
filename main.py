@@ -133,11 +133,32 @@ def load_spot_df_for_char():
     return spot_df
 
 
+def char_violin_plot():
+    spot_df = load_spot_df_for_char()
+    relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                        'liveness', 'speechiness', 'valence', 'decade']
+    spot_df = spot_df[relevant_columns]
+
+    for decade in range(1920, 2021, 10):
+        decade_data = spot_df[spot_df['decade'] == decade].drop('decade', axis=1)
+        plt.violinplot(decade_data, showmeans=True, showextrema=False)
+        plt.xticks(ticks=[1, 2, 3, 4, 5, 6, 7], 
+                   labels=['Acou', 'Dance', 'Energy', 'Instru',
+                           'Live', 'Speech', 'Val'])
+        plt.ylim(0, 100)
+        plt.title(str(decade) + '\'s Characteristic Violin Plot')
+        plt.ylabel('Average Values')
+        plt.xlabel('Characteristics')
+        plt.savefig('plots/Q_2/decade_violin_plot/' + str(decade))
+        plt.clf()
+
+
 def main():
     # create_characteristic_vs_time()
     # create_box_characteristic_vs_time()
-    plot_characteristic_histogram()
-    plot_difference_characteristic_histogram()
+    # plot_characteristic_histogram()
+    # plot_difference_characteristic_histogram()
+    char_violin_plot()
 
 
 if __name__ == '__main__':
