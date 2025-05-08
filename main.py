@@ -153,12 +153,30 @@ def char_violin_plot():
         plt.clf()
 
 
+def plot_char_vs_pop():
+    spot_df = load_spot_df_for_char()
+    relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                        'liveness', 'speechiness', 'valence', 'popularity']
+    spot_df = spot_df[relevant_columns]
+    spot_df = spot_df.groupby('popularity').mean()
+
+    plt.plot(spot_df)
+    plt.ylim(0, 100)
+    plt.legend(['Acousticness', 'Danceability', 'Energy', 'Instrumentalness',
+                'Liveness', 'Speechiness', 'Valence'], loc='upper right')
+    plt.title('Popularity Vs. Characteristic Value')
+    plt.ylabel('Average Values')
+    plt.xlabel('Popualrity')
+    plt.savefig('plots/Q_2/Popularity_vs_characteristic')
+
+
 def main():
     # create_characteristic_vs_time()
     # create_box_characteristic_vs_time()
     # plot_characteristic_histogram()
     # plot_difference_characteristic_histogram()
-    char_violin_plot()
+    # char_violin_plot()
+    plot_char_vs_pop()
 
 
 if __name__ == '__main__':
