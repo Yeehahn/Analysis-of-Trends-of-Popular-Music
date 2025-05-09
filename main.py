@@ -8,6 +8,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import linregress
 
 
 def create_characteristic_vs_time():
@@ -30,6 +31,7 @@ def create_characteristic_vs_time():
         sns.regplot(x=spot_df.index, y=characteristic, data=spot_df)
         adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time/',
                                    '_vs_time_reg')
+    plt.clf()
 
 
 def create_box_characteristic_vs_time():
@@ -49,6 +51,7 @@ def create_box_characteristic_vs_time():
         sns.boxplot(x='decade', y=characteristic, data=spot_df, showfliers=False)
         adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time/',
                                    '_vs_time_box')
+    plt.clf()
 
 
 def adjust_plot_characteristic(characteristic, folder_path, title):
@@ -92,6 +95,7 @@ def plot_characteristic_histogram():
     plt.title('Characteristics of Popular Music by Decade')
     plt.legend()
     plt.savefig('plots/Q_2/characteristic_histogram', bbox_inches='tight')
+    plt.clf()
 
 
 def plot_difference_characteristic_histogram():
@@ -124,6 +128,7 @@ def plot_difference_characteristic_histogram():
     plt.title('Characteristics of Popular - All Music by Decade')
     plt.legend()
     plt.savefig('plots/Q_2/characteristic_difference_histogram', bbox_inches='tight')
+    plt.clf()
 
 
 def load_spot_df_for_char():
@@ -153,6 +158,27 @@ def char_violin_plot():
         plt.clf()
 
 
+def smoothed_char_vs_pop():
+    spot_df = load_spot_df_for_char()
+    relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                        'liveness', 'speechiness', 'valence', 'popularity']
+    spot_df = spot_df[relevant_columns]
+    spot_df = spot_df.groupby('popularity').mean()
+
+    for char in spot_df:
+        spot_df[char] = spot_df[char].rolling(window=5).mean()
+
+    plt.plot(spot_df)
+    plt.ylim(0, 100)
+    plt.legend(['Acousticness', 'Danceability', 'Energy', 'Instrumentalness',
+                'Liveness', 'Speechiness', 'Valence'], loc='upper right', fontsize='x-small')
+    plt.title('Popularity Vs. Characteristic Value')
+    plt.ylabel('Average Values')
+    plt.xlabel('Popualrity')
+    plt.savefig('plots/Q_2/Smoothed_Popularity_vs_characteristic')
+    plt.clf()
+
+
 def plot_char_vs_pop():
     spot_df = load_spot_df_for_char()
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
@@ -163,11 +189,22 @@ def plot_char_vs_pop():
     plt.plot(spot_df)
     plt.ylim(0, 100)
     plt.legend(['Acousticness', 'Danceability', 'Energy', 'Instrumentalness',
-                'Liveness', 'Speechiness', 'Valence'], loc='upper right')
+                'Liveness', 'Speechiness', 'Valence'], loc='upper right', fontsize='x-small')
     plt.title('Popularity Vs. Characteristic Value')
     plt.ylabel('Average Values')
     plt.xlabel('Popualrity')
     plt.savefig('plots/Q_2/Popularity_vs_characteristic')
+    plt.clf()
+
+
+def calculate_r_value_char():
+    spot_df = load_spot_df_for_char()
+    relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                        'liveness', 'speechiness', 'valence', 'popularity']
+    spot_df = spot_df[relevant_columns]
+    spot_df = spot_df.groupby('popularity').mean()
+    
+    r_sq_values = pd.Dataframe()
 
 
 def main():
@@ -177,6 +214,7 @@ def main():
     # plot_difference_characteristic_histogram()
     # char_violin_plot()
     plot_char_vs_pop()
+    smoothed_char_vs_pop()
 
 
 if __name__ == '__main__':
