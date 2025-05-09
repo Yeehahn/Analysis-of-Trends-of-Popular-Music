@@ -8,7 +8,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.stats import linregress
 
 
 def create_characteristic_vs_time():
@@ -197,19 +196,28 @@ def plot_char_vs_pop():
     plt.clf()
 
 
-def calculate_r_value_char():
+def r_value_char_bar():
     spot_df = load_spot_df_for_char()
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                         'liveness', 'speechiness', 'valence', 'popularity']
     spot_df = spot_df[relevant_columns]
-    spot_df = spot_df.groupby('popularity').mean()
+    spot_df = spot_df.groupby('popularity').mean().reset_index()
+    correlations = spot_df.corr(method='pearson')
+    r_sq_values = pd.DataFrame({'characteristic': [], 
+                   'value': []})
+    relevant_columns.remove('popularity')
+    for i, char in enumerate(relevant_columns):
+        r_val = correlations.loc['popularity', char]
+        r_sq_values.loc[i] = {'characteristic': char.capitalize(), 'value': r_val}
 
-    r_sq_values = pd.Dataframe()
-
-    for char in spot_df:
-        r_sq = spot_df[char].linregress().rvalue() ** 2
-        r_sq_values.append()
-
+    print(r_sq_values)
+    sns.barplot(r_sq_values, x='characteristic', y='value')
+    plt.xlabel('Characteristics')
+    plt.xticks(rotation=30)
+    plt.ylabel('r Values')
+    plt.title('r values of Popularity vs. Characteristics')
+    plt.savefig('plots/Q_2/r_popularity_vs_characteristics', bbox_inches='tight')
+    plt.clf()
 
 def main():
     # create_characteristic_vs_time()
@@ -217,8 +225,9 @@ def main():
     # plot_characteristic_histogram()
     # plot_difference_characteristic_histogram()
     # char_violin_plot()
-    plot_char_vs_pop()
-    smoothed_char_vs_pop()
+    # plot_char_vs_pop()
+    # smoothed_char_vs_pop()
+    r_value_char_bar()
 
 
 if __name__ == '__main__':
