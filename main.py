@@ -203,8 +203,12 @@ def calculate_r_value_char():
                         'liveness', 'speechiness', 'valence', 'popularity']
     spot_df = spot_df[relevant_columns]
     spot_df = spot_df.groupby('popularity').mean()
-    
+
     r_sq_values = pd.Dataframe()
+
+    for char in spot_df:
+        r_sq = spot_df[char].linregress().rvalue() ** 2
+        r_sq_values.append()
 
 
 def main():
