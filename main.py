@@ -125,6 +125,7 @@ def plot_difference_characteristic_histogram():
 
     plt.ylabel('Average Difference Value of Characteristic')
     plt.title('Characteristics of Popular - All Music by Decade')
+    plt.ylim(-50, 50)
     plt.legend()
     plt.savefig('plots/Q_2/characteristic_difference_histogram', bbox_inches='tight')
     plt.clf()
@@ -204,13 +205,13 @@ def r_value_char_bar():
     spot_df = spot_df.groupby('popularity').mean().reset_index()
     correlations = spot_df.corr(method='pearson')
     r_sq_values = pd.DataFrame({'characteristic': [], 
-                   'value': []})
+                                'value': []})
     relevant_columns.remove('popularity')
+
     for i, char in enumerate(relevant_columns):
         r_val = correlations.loc['popularity', char]
         r_sq_values.loc[i] = {'characteristic': char.capitalize(), 'value': r_val}
 
-    print(r_sq_values)
     sns.barplot(r_sq_values, x='characteristic', y='value')
     plt.xlabel('Characteristics')
     plt.xticks(rotation=30)
@@ -219,11 +220,12 @@ def r_value_char_bar():
     plt.savefig('plots/Q_2/r_popularity_vs_characteristics', bbox_inches='tight')
     plt.clf()
 
+
 def main():
     # create_characteristic_vs_time()
     # create_box_characteristic_vs_time()
     # plot_characteristic_histogram()
-    # plot_difference_characteristic_histogram()
+    plot_difference_characteristic_histogram()
     # char_violin_plot()
     # plot_char_vs_pop()
     # smoothed_char_vs_pop()
