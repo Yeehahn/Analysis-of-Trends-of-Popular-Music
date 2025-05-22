@@ -27,7 +27,7 @@ All of your generated plots need to be saved here. It should contain only images
 **Relative Feature Importance Predicting Hit Status** This is a bar chart that displays the relative importance of various musical characteristics, where relative importance displays how much having said characteristics influences music popularity. This will likely be obtained by a simple machine learning model.
 
 
-**Characteristics in Popular Music:** This is a histogram/bar plot and summarizes all of the characteristics in each decade and their average values for popular music. The sketch displays data from 1990-2010 because more decades would create a cluttered plot and an "overload" of information. However, the final project will likely create plots to encompass 1920-2024. This will help show what musical characteristics will most likely be present to create popular music.
+**Characteristics in Popular Music:** This is a histogram/bar plot and summarizes all of the characteristics in each decade and their average values for popular music. The sketch displays data from 1990-2010 because more decades would create a cluttered plot and an "overload" of information. If further analysis is necesarry than plots will be created for 1920-1990. This will help show what musical characteristics will most likely be present to create popular music.
 
 
 **Differences in Characteristics of Popular Music and All Music:** This is a histogram/bar plot and displays the average value of each characteristic for popular music subtracted by the average value of each characteristic for all music. This will display what is different between popular music and all music and that difference can help suggest what makes popular music popular, what the difference is.

@@ -10,7 +10,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def create_characteristic_vs_time():
+def create_time_vs_characteristic():
+    '''
+    Plots the Change the Time vs Characteristic linear regression graph 
+    outlined in the README.MD in plots
+    It is called Change in Danceability Over Time in the README however this method creates
+    a graph for all numerical characteristics given by spotify
+    '''
     sns.set()
     spot_df = pd.read_csv('data_organized/spotify_dataset.csv')
     spot_df = spot_df.drop(['name', 'artists'], axis=1)
@@ -23,17 +29,23 @@ def create_characteristic_vs_time():
     for characteristic in characteristic_100_range:
         sns.regplot(x=spot_df.index, y=characteristic, data=spot_df)
         plt.ylim((0, 100))
-        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time/',
+        adjust_plot_characteristic(characteristic, 'plots/time_vs_characteristic_Q1/',
                                    '_vs_time_reg')
 
     for characteristic in characteristic_not_100_range:
         sns.regplot(x=spot_df.index, y=characteristic, data=spot_df)
-        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time/',
+        adjust_plot_characteristic(characteristic, 'plots/time_vs_characteristic_Q1/',
                                    '_vs_time_reg')
     plt.clf()
 
 
-def create_box_characteristic_vs_time():
+def create_box_time_vs_characteristic():
+    '''
+    Plots the Change the Time vs Characteristic box plot graph 
+    outlined in the README.MD in plots
+    It is called Change in Danceability Over Time in the README however this method creates
+    a graph for all numerical characteristics given by spotify
+    '''
     sns.set()
     spot_df = load_spot_df_for_char()
     characteristic_100_range = ['acousticness', 'danceability', 'energy', 'instrumentalness',
@@ -43,17 +55,22 @@ def create_box_characteristic_vs_time():
     for characteristic in characteristic_100_range:
         sns.boxplot(x='decade', y=characteristic, data=spot_df, showfliers=False)
         plt.ylim((0, 100))
-        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time/',
+        adjust_plot_characteristic(characteristic, 'plots/time_vs_characteristic_Q1/',
                                    '_vs_time_box')
 
     for characteristic in characteristic_not_100_range:
         sns.boxplot(x='decade', y=characteristic, data=spot_df, showfliers=False)
-        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time/',
+        adjust_plot_characteristic(characteristic, 'plots/time_vs_characteristic_Q1/',
                                    '_vs_time_box')
     plt.clf()
 
 
 def adjust_plot_characteristic(characteristic, folder_path, title):
+    '''
+    Used in the time_vs_characteristic graphs
+    Sets the xlabel, ylabel, title, and saves the plot to the correct location 
+    with the correct name
+    '''
     capital_characteristic = characteristic.capitalize()
     plt.title('Change in ' + capital_characteristic + ' Over Time')
     plt.xlabel('Year')
@@ -71,6 +88,10 @@ def plot_all_characteristic_of_music():
 
 
 def plot_characteristic_histogram():
+    '''
+    Creates the histograms of each characteristic for each decade from 1990-2010
+    Characteristics in Popular Music is the name in the README
+    '''
     sns.set()
     spot_df = load_spot_df_for_char()
     spot_df = spot_df[(spot_df['decade'] >= 1990) & (spot_df['decade'] < 2020)]
@@ -98,6 +119,9 @@ def plot_characteristic_histogram():
 
 
 def plot_difference_characteristic_histogram():
+    '''
+    
+    '''
     spot_df = load_spot_df_for_char()
     spot_df = spot_df[(spot_df['decade'] >= 1990) & (spot_df['decade'] < 2020)]
     characteristic_100_range = ['acousticness', 'danceability', 'energy', 'instrumentalness',
@@ -220,8 +244,8 @@ def r_value_char_bar():
     plt.clf()
 
 def main():
-    # create_characteristic_vs_time()
-    # create_box_characteristic_vs_time()
+    # create_time_vs_characteristic()
+    # create_box_time_vs_characteristic()
     # plot_characteristic_histogram()
     # plot_difference_characteristic_histogram()
     # char_violin_plot()
