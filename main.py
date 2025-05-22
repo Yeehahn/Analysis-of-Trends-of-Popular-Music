@@ -10,11 +10,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def create_time_vs_characteristic():
+def create_characteristic_vs_time():
     '''
     Plots the Change the Time vs Characteristic linear regression graph 
     outlined in the README.MD in plots
-    Plot is created in Q_1/time_vs_characteristic_Q1
+    Plot is created in Q_1/characteristic_vs_time_Q1
     It is called Change in Danceability Over Time in the README however this method creates
     a graph for all numerical characteristics given by spotify
     '''
@@ -30,21 +30,21 @@ def create_time_vs_characteristic():
     for characteristic in characteristic_100_range:
         sns.regplot(x=spot_df.index, y=characteristic, data=spot_df)
         plt.ylim((0, 100))
-        adjust_plot_characteristic(characteristic, 'plots/time_vs_characteristic_Q1/',
+        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time_Q1/',
                                    '_vs_time_reg')
 
     for characteristic in characteristic_not_100_range:
         sns.regplot(x=spot_df.index, y=characteristic, data=spot_df)
-        adjust_plot_characteristic(characteristic, 'plots/time_vs_characteristic_Q1/',
+        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time_Q1/',
                                    '_vs_time_reg')
     plt.clf()
 
 
-def create_box_time_vs_characteristic():
+def create_box_characteristic_vs_time():
     '''
     Plots the Change the Time vs Characteristic box plot graph 
     outlined in the README.MD in plots
-    Plot is created in Q_1/time_vs_characteristic_Q1
+    Plot is created in Q_1/characteristic_vs_time_Q1
     It is called Change in Danceability Over Time in the README however this method creates
     a graph for all numerical characteristics given by spotify
     '''
@@ -57,19 +57,19 @@ def create_box_time_vs_characteristic():
     for characteristic in characteristic_100_range:
         sns.boxplot(x='decade', y=characteristic, data=spot_df, showfliers=False)
         plt.ylim((0, 100))
-        adjust_plot_characteristic(characteristic, 'plots/time_vs_characteristic_Q1/',
+        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time_Q1/',
                                    '_vs_time_box')
 
     for characteristic in characteristic_not_100_range:
         sns.boxplot(x='decade', y=characteristic, data=spot_df, showfliers=False)
-        adjust_plot_characteristic(characteristic, 'plots/time_vs_characteristic_Q1/',
+        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time_Q1/',
                                    '_vs_time_box')
     plt.clf()
 
 
 def adjust_plot_characteristic(characteristic, folder_path, title):
     '''
-    Used in the time_vs_characteristic graphs
+    Used in the characteristic_vs_time graphs
     Sets the xlabel, ylabel, title, and saves the plot to the correct location 
     with the correct name
     '''
@@ -86,7 +86,22 @@ def plot_all_characteristic_of_music():
     sns.set()
     spot_df = pd.read_csv('data_organized/spotify_dataset.csv')
     spot_df = spot_df[['acousticness', 'danceability', 'energy', 'instrumentalness',
-                       'liveness', 'speechiness', 'valence']]
+                       'liveness', 'speechiness', 'valence', 'year']]
+    char_col = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                       'liveness', 'speechiness', 'valence']
+    for char in char_col:
+        # Smoothing the values so the graph is easier to read
+        spot_df[char] = spot_df[char].rolling(window=5).mean()
+
+    characteristics = spot_df.groupby('year').mean()
+    characteristics.plot()
+    plt.legend(['Acousticness', 'Danceability', 'Energy', 'Instrumentalness',
+                'Liveness', 'Speechiness', 'Valence'], loc='upper right', fontsize='x-small')
+    plt.ylim(0, 100)
+    plt.savefig('plots/Q_1/all_char_over_time', bbox_inches='tight')
+    plt.clf()
+    
+    
 
 
 def plot_characteristic_histogram():
@@ -228,6 +243,8 @@ def smoothed_char_vs_pop():
 
 
 def plot_char_vs_pop():
+    '''
+    '''
     spot_df = load_spot_df_for_char()
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                         'liveness', 'speechiness', 'valence', 'popularity']
@@ -306,14 +323,15 @@ def follower_count_against_grammy_nominations():
     '''
 
 def main():
-    # create_time_vs_characteristic()
-    # create_box_time_vs_characteristic()
+    # create_characteristic_vs_time()
+    # create_box_characteristic_vs_time()
     # plot_characteristic_histogram()
-    plot_difference_characteristic_histogram()
+    # plot_difference_characteristic_histogram()
     # char_violin_plot()
     # plot_char_vs_pop()
     # smoothed_char_vs_pop()
-    r_value_char_bar()
+    # r_value_char_bar()
+    plot_all_characteristic_of_music()
 
 
 if __name__ == '__main__':
