@@ -30,7 +30,7 @@ All of your generated plots need to be saved here. It should contain only images
 **Characteristics in Popular Music:** This is a histogram/bar plot and summarizes all of the characteristics in each decade and their average values for popular music. The sketch displays data from 1990-2010 because more decades would create a cluttered plot and an "overload" of information. If further analysis is necesarry than plots will be created for 1920-1990. This will help show what musical characteristics will most likely be present to create popular music.
 
 
-**Differences in Characteristics of Popular Music and All Music:** This is a histogram/bar plot and displays the average value of each characteristic for popular music subtracted by the average value of each characteristic for all music. This will display what is different between popular music and all music and that difference can help suggest what makes popular music popular, what the difference is.
+**Differences in Characteristics of Popular Music and Unpopular Music:** This is a histogram/bar plot and displays the average value of each characteristic for popular music subtracted by the average value of each characteristic for unpopular music. This will display what is different between popular music and unpopular music and that difference can help suggest what makes popular music popular, what the difference is.
 
 
 **Traits VS. Popularity:** This is a line plot that compares all of the average musical characteristics against popularity. This will help display what characteristics are associated with popular music and will help create the next graph that displays mathematical information to suggest what music has a strong correlation with popularity.

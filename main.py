@@ -14,6 +14,7 @@ def create_time_vs_characteristic():
     '''
     Plots the Change the Time vs Characteristic linear regression graph 
     outlined in the README.MD in plots
+    Plot is created in Q_1/time_vs_characteristic_Q1
     It is called Change in Danceability Over Time in the README however this method creates
     a graph for all numerical characteristics given by spotify
     '''
@@ -43,6 +44,7 @@ def create_box_time_vs_characteristic():
     '''
     Plots the Change the Time vs Characteristic box plot graph 
     outlined in the README.MD in plots
+    Plot is created in Q_1/time_vs_characteristic_Q1
     It is called Change in Danceability Over Time in the README however this method creates
     a graph for all numerical characteristics given by spotify
     '''
@@ -90,6 +92,7 @@ def plot_all_characteristic_of_music():
 def plot_characteristic_histogram():
     '''
     Creates the histograms of each characteristic for each decade from 1990-2010
+    Plot is created in plots/Q_2
     Characteristics in Popular Music is the name in the README
     '''
     sns.set()
@@ -103,6 +106,9 @@ def plot_characteristic_histogram():
     bar_width = 0.1
     fig, ax = plt.subplots(figsize=(14, 6))
 
+
+    # Since this plot plots the x-axis as decades but it needs to be separated by characteristics
+    # Have to manually place bars onto the plot and then set them with a legend
     for i, char in enumerate(characteristic_100_range):
         ax.bar(x_axis + i * bar_width, decade_char[char], bar_width, label=char)
 
@@ -120,20 +126,25 @@ def plot_characteristic_histogram():
 
 def plot_difference_characteristic_histogram():
     '''
-    
+    Creates the histogram that subtracts the average value of popular music - unpopular music
+    from 1990-2010
+    Plot is created in plots/Q_2
+    Differences in Characteristics of Popular Music and Unpopular Music in README
+    Reference README to see more detailed description and reasoning behind plot
     '''
     spot_df = load_spot_df_for_char()
     spot_df = spot_df[(spot_df['decade'] >= 1990) & (spot_df['decade'] < 2020)]
     characteristic_100_range = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                                 'liveness', 'speechiness', 'valence']
-    spot_tot_df = pd.read_csv('raw_data/spotify_dataset_clean.csv')
-    spot_tot_df = spot_tot_df.drop(['name', 'artists'], axis=1)
-    spot_tot_df['decade'] = spot_tot_df['year'].floordiv(10).mul(10)
-    spot_tot_df = spot_tot_df[(spot_tot_df['decade'] >= 1990) & (spot_tot_df['decade'] < 2020)]
+    
+    unpop_df = pd.read_csv('data_organized/unpopular_music.csv')
+    unpop_df = unpop_df.drop(['name', 'artists'], axis=1)
+    unpop_df['decade'] = unpop_df['year'].floordiv(10).mul(10)
+    unpop_df = unpop_df[(unpop_df['decade'] >= 1990) & (unpop_df['decade'] < 2020)]
 
     decade_pop_char = spot_df.groupby('decade')[characteristic_100_range].mean()
-    decade_tot_char = spot_tot_df.groupby('decade')[characteristic_100_range].mean() * 100
-    decade_char = decade_pop_char - decade_tot_char
+    decade_unpop_char = unpop_df.groupby('decade')[characteristic_100_range].mean()
+    decade_char = decade_pop_char - decade_unpop_char
 
     x_axis = np.arange(3)
     bar_width = 0.1
@@ -148,7 +159,7 @@ def plot_difference_characteristic_histogram():
     ax.set_xticklabels([1990, 2000, 2010])
 
     plt.ylabel('Average Difference Value of Characteristic')
-    plt.title('Characteristics of Popular - All Music by Decade')
+    plt.title('Characteristics of Popular - Unpopular Music by Decade')
     plt.ylim(-50, 50)
     plt.legend()
     plt.savefig('plots/Q_2/characteristic_difference_histogram', bbox_inches='tight')
@@ -156,6 +167,12 @@ def plot_difference_characteristic_histogram():
 
 
 def load_spot_df_for_char():
+    '''
+    The spotify_dataset is a good dataset and all of the columns are often used
+    However, when looking at average characterisitcs strings cause issues with aggregate functions
+    Loads in the spotify dataset with some more pre-processing (drops name and artist columns and 
+    computates decade column)
+    '''
     spot_df = pd.read_csv('data_organized/spotify_dataset.csv')
     spot_df = spot_df.drop(['name', 'artists'], axis=1)
     spot_df['decade'] = spot_df['year'].floordiv(10).mul(10)
@@ -163,6 +180,13 @@ def load_spot_df_for_char():
 
 
 def char_violin_plot():
+    '''
+    Plots a violin plot for all numeric characteristics ranging from 0 - 100
+    Each decade from 1920-2020 gets its own plot
+    Plot is created in plots/Q_2/decade_violin_plot
+    Violin Plot of Characteristics of Popular Music in README
+    Reference for further description
+    '''
     spot_df = load_spot_df_for_char()
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                         'liveness', 'speechiness', 'valence', 'decade']
