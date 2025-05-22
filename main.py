@@ -149,6 +149,7 @@ def plot_difference_characteristic_histogram():
 
     plt.ylabel('Average Difference Value of Characteristic')
     plt.title('Characteristics of Popular - All Music by Decade')
+    plt.ylim(-50, 50)
     plt.legend()
     plt.savefig('plots/Q_2/characteristic_difference_histogram', bbox_inches='tight')
     plt.clf()
@@ -228,13 +229,13 @@ def r_value_char_bar():
     spot_df = spot_df.groupby('popularity').mean().reset_index()
     correlations = spot_df.corr(method='pearson')
     r_sq_values = pd.DataFrame({'characteristic': [], 
-                   'value': []})
+                                'value': []})
     relevant_columns.remove('popularity')
+
     for i, char in enumerate(relevant_columns):
         r_val = correlations.loc['popularity', char]
         r_sq_values.loc[i] = {'characteristic': char.capitalize(), 'value': r_val}
 
-    print(r_sq_values)
     sns.barplot(r_sq_values, x='characteristic', y='value')
     plt.xlabel('Characteristics')
     plt.xticks(rotation=30)
@@ -243,11 +244,48 @@ def r_value_char_bar():
     plt.savefig('plots/Q_2/r_popularity_vs_characteristics', bbox_inches='tight')
     plt.clf()
 
+def grammy_characteristic_violin_plot():
+    '''
+    Plots a violin plot comparing each characteristic (acousticness, danceability,
+    instrumentalness, valence, liveness, speechiness) for Grammy winners and for 
+    general popular music
+    '''
+    relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                    'liveness', 'speechiness', 'valence']
+    pass
+
+def percent_grammy_nominees_with_characteristic_plot():
+    '''
+    Plots a bar chart that displays each relevant characteristic (acousticness, danceability,
+    instrumentalness, valence, liveness, speechiness) and what percentage of Grammy winners
+    have a score of above 70 (a reasonably high score) for that characteristic
+    '''
+    pass
+
+def artists_with_most_grammy_nominees():
+    '''
+    Plots a bar chart that plots the top 5 artists with the most grammy nominees
+    against the number of times the artist was nominated
+    '''
+    pass
+
+def artists_with_most_grammy_wins():
+    '''
+    Plots a bar chart that plots the top 5 artists with the most grammy wins
+    against the number of times the artist was won
+    '''
+    pass
+
+def follower_count_against_grammy_nominations():
+    '''
+    Plots a scatter plot of follower count against grammy nominations for various artists
+    '''
+
 def main():
     # create_time_vs_characteristic()
     # create_box_time_vs_characteristic()
     # plot_characteristic_histogram()
-    # plot_difference_characteristic_histogram()
+    plot_difference_characteristic_histogram()
     # char_violin_plot()
     # plot_char_vs_pop()
     # smoothed_char_vs_pop()

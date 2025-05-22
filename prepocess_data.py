@@ -98,15 +98,20 @@ def create_final_spotify_dataset():
     '''
     Since the paper is looking for trends in popular music
     The spotify_dataset is filtered to just songs that are considered "popular"
-    Saves the dataset to data_organized as spotify_dataset.csv
+    Creates a second dataset of all of the unpopular music
+    Saves the dataset to data_organized as spotify_dataset.csv and unpopular_music.csv
     '''
     spotify_data = clean_spotify_dataset()
     # Older songs need to be weighted more
     sufficiently_popular = (spotify_data['popularity'] - 0.4 * (spotify_data['year'] - 1920)) > 10
+    sufficiently_unpopular = (spotify_data['popularity'] - 0.4 * (spotify_data['year'] - 1920)) <= 10
+    spotify_data_popular = spotify_data[sufficiently_popular]
+    unpopular = spotify_data[sufficiently_unpopular]
 
-    spotify_data = spotify_data[sufficiently_popular]
-    spotify_data = multiply_characteristics_100(spotify_data)
-    spotify_data.to_csv('data_organized/spotify_dataset.csv', sep=',', index=False, encoding='utf-8')
+    spotify_data_popular = multiply_characteristics_100(spotify_data)
+    unpopular = multiply_characteristics_100(unpopular)
+    spotify_data_popular.to_csv('data_organized/spotify_dataset.csv', sep=',', index=False, encoding='utf-8')
+    unpopular.to_csv('data_organized/unpopular_music.csv', sep=',', index=False, encoding='utf-8')
 
 
 def clean_grammy():
