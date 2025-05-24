@@ -293,7 +293,31 @@ def grammy_characteristic_violin_plot():
     '''
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                     'liveness', 'speechiness', 'valence']
-    pass
+    df_grammy = pd.read_csv('data_organized/grammy_song_char.csv')
+    df_pop = pd.read_csv('data_organized/spotify_dataset.csv')
+
+    # Normalize columns
+    df_grammy[relevant_columns] = df_grammy[relevant_columns] / 10000
+    df_pop[relevant_columns] = df_pop[relevant_columns] / 100
+
+    df_grammy = df_grammy.drop_duplicates(subset=['name', 'artists'])
+    df_grammy['label'] = 'Grammy Winners'
+    df_pop['label'] = 'Popular Music'
+
+    necessary_columns = ['name', 'artists'] + relevant_columns + ['label']
+    df = pd.concat([df_grammy[necessary_columns], df_pop[necessary_columns]])
+    melted_df = pd.melt(df, id_vars='label', value_vars=relevant_columns,
+                        var_name='Characteristic', value_name='Value')
+    
+    sns.violinplot(x='Characteristic', y='Value', hue='label',
+                   data=melted_df, inner='quartile')
+    plt.title('Characteristics of Grammy Nominees vs. Popular Music')
+    plt.xlabel('Characteristic')
+    plt.ylabel('Value')
+    plt.legend(title='label')
+    plt.xticks(rotation=45)
+    plt.savefig('plots/Q_3/grammy_characteristic_violin_plot', bbox_inches='tight')
+    plt.clf()
 
 def percent_grammy_nominees_with_characteristic_plot():
     '''
@@ -301,7 +325,30 @@ def percent_grammy_nominees_with_characteristic_plot():
     instrumentalness, valence, liveness, speechiness) and what percentage of Grammy winners
     have a score of above 70 (a reasonably high score) for that characteristic
     '''
-    pass
+    df = pd.read_csv('data_organized/grammy_song_char.csv')
+    relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
+                    'liveness', 'speechiness', 'valence']
+    df[relevant_columns] = df[relevant_columns] / 10000
+    df = df.drop_duplicates(subset=['name', 'artists'])
+    threshold = 0.64
+    # Calculate percentage of songs above threshold for each characteristic
+    high_scores = {
+        col: (df[col] > threshold).mean() * 100
+        for col in relevant_columns
+    }
+
+    df_scores = pd.DataFrame({'Characteristic': list(high_scores.keys()),
+                              'Percentage': list(high_scores.values())})
+    
+    sns.barplot(x='Characteristic', y='Percentage', data=df_scores)
+    plt.title('Percentage of Grammy Nominees with High Characteristic Scores')
+    plt.xlabel('Characteristic')
+    plt.ylabel('Percentage')
+    plt.xticks(rotation=45)
+    plt.ylim(0, 100)
+    plt.savefig('plots/Q_3/grammy_characteristic_percent_high', bbox_inches='tight')
+    plt.clf()
+
 
 def artists_with_most_grammy_nominees():
     '''
@@ -331,7 +378,9 @@ def main():
     # plot_char_vs_pop()
     # smoothed_char_vs_pop()
     # r_value_char_bar()
-    plot_all_characteristic_of_music()
+    #plot_all_characteristic_of_music()
+    #grammy_characteristic_violin_plot()
+    percent_grammy_nominees_with_characteristic_plot()
 
 
 if __name__ == '__main__':
