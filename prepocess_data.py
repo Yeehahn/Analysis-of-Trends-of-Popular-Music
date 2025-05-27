@@ -9,7 +9,7 @@ This file does the following types of work:
 '''
 import pandas as pd
 import ast
-
+import re
 
 def preprocess_artists():
     '''
@@ -89,7 +89,7 @@ def clean_spotify_dataset():
     spotify_data = spotify_data[['name', 'year', 'artists', 'valence', 'acousticness', 'danceability', 
                                  'duration_ms', 'energy', 'instrumentalness', 'liveness', 'loudness', 
                                  'popularity', 'speechiness', 'tempo']]
-
+    spotify_data['decade'] = spotify_data['year'].floordiv(10).mul(10)
     spotify_data.to_csv('raw_data/spotify_dataset_clean.csv', sep=',', index=False, encoding='utf-8')
     return spotify_data
 
@@ -129,7 +129,29 @@ def clean_grammy():
 
     songs = pd.read_csv('data_organized/spotify_dataset.csv', converters={'artists': ast.literal_eval})
     grammy = grammy.apply(lambda row: fill_artists(row, songs), axis=1)
+    grammy['artist'] = grammy['artist'].apply(clean_artist)
     grammy.to_csv('data_organized/grammy_award_data.csv', sep=',', index=False, encoding='utf-8')
+
+
+def clean_artist(artist):
+
+    # Re-creating this set everytime is slow however the dataset is small enough where
+    # This does not have significant effects on performacne and makes it easier to read
+    role_words = {'engineer', 'conductor', 'songwriters', 'composer', 'vocals', 'arranger', 
+                  'various artists', 'artists', 'soloist', 'producer', 'songwriter', 'art director',
+                  'note writer', 'artist', 'album notes writer', 'art directors', 'engineers', 'engineer',
+                  'mastering engineer', 'producers', 'composers', 'arrangers', 'remixer', 'soloists', 
+                  'mastering engineers', 'ensembles', 'ensemble'}
+    out_paren = re.sub(r'\([^)]*\)', '', artist)
+
+    raw_names = re.split(r'\s*[&,]\s*|\s+and\s+', out_paren)
+
+    cleaned = set()
+    for name in raw_names:
+        name = name.strip()
+        if name and name.lower() not in role_words:
+            cleaned.add(name)
+    return list(cleaned)
 
 
 def fill_artists(grammy_row, songs):
@@ -214,8 +236,10 @@ def multiply_characteristics_100(df):
 def main():
     merge_artists()
     create_final_spotify_dataset()
-    clean_grammy()
-    grammy_songs_characteristics()
+    print('start')
+    # clean_grammy()
+    print('1')
+    # grammy_songs_characteristics()
     clean_genres()
     print('done')
 

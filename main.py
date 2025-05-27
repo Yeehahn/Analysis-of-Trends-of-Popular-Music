@@ -31,12 +31,12 @@ def create_characteristic_vs_time():
     for characteristic in characteristic_100_range:
         sns.regplot(x=spot_df.index, y=characteristic, data=spot_df)
         plt.ylim((0, 100))
-        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time_Q1/',
+        adjust_plot_characteristic(characteristic, 'plots/Q_1/characteristic_vs_time_Q1/',
                                    '_vs_time_reg')
 
     for characteristic in characteristic_not_100_range:
         sns.regplot(x=spot_df.index, y=characteristic, data=spot_df)
-        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time_Q1/',
+        adjust_plot_characteristic(characteristic, 'plots/Q_1/characteristic_vs_time_Q1/',
                                    '_vs_time_reg')
     plt.clf()
 
@@ -58,12 +58,12 @@ def create_box_characteristic_vs_time():
     for characteristic in characteristic_100_range:
         sns.boxplot(x='decade', y=characteristic, data=spot_df, showfliers=False)
         plt.ylim((0, 100))
-        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time_Q1/',
+        adjust_plot_characteristic(characteristic, 'plots/Q_1/characteristic_vs_time_Q1/',
                                    '_vs_time_box')
 
     for characteristic in characteristic_not_100_range:
         sns.boxplot(x='decade', y=characteristic, data=spot_df, showfliers=False)
-        adjust_plot_characteristic(characteristic, 'plots/characteristic_vs_time_Q1/',
+        adjust_plot_characteristic(characteristic, 'plots/Q_1/characteristic_vs_time_Q1/',
                                    '_vs_time_box')
     plt.clf()
 
@@ -187,12 +187,10 @@ def load_spot_df_for_char():
     '''
     The spotify_dataset is a good dataset and all of the columns are often used
     However, when looking at average characterisitcs strings cause issues with aggregate functions
-    Loads in the spotify dataset with some more pre-processing (drops name and artist columns and 
-    computates decade column)
+    Loads in the spotify dataset with some more pre-processing (drops name and artist columns)
     '''
     spot_df = pd.read_csv('data_organized/spotify_dataset.csv')
     spot_df = spot_df.drop(['name', 'artists'], axis=1)
-    spot_df['decade'] = spot_df['year'].floordiv(10).mul(10)
     return spot_df
 
 
@@ -381,26 +379,6 @@ def artists_with_most_grammy_nominees():
     plt.clf()
 
 
-def clean_artist(artist):
-    role_words = {'engineer', 'conductor', 'songwriters', 'composer', 'vocals', 'arranger', 
-                  'various artists', 'artists', 'soloist', 'producer', 'songwriter', 'art director',
-                  'note writer', 'artist', 'album notes writer', 'art directors', 'engineers', 'engineer',
-                  'mastering engineer', 'producers', 'composers', 'arrangers', 'remixer', 'soloists', 
-                  'mastering engineers'}
-    in_paren = re.findall(r'\(([^)]*)\)', artist)
-    out_paren = re.sub(r'\([^)]*\)', '', artist)
-    combined = ' & '.join([out_paren] + in_paren)
-
-    raw_names = re.split(r'\s*[&,]\s*|\s+and\s+', combined)
-
-    cleaned = set()
-    for name in raw_names:
-        name = name.strip()
-        if name and name.lower() not in role_words:
-            cleaned.add(name)
-    return list(cleaned)
-
-
 def artists_with_most_grammy_wins():
     '''
     Plots a bar chart that plots the top 5 artists with the most grammy wins
@@ -461,20 +439,21 @@ def follower_count_against_grammy_nominations():
 
 
 def main():
-    # create_characteristic_vs_time()
-    # create_box_characteristic_vs_time()
-    # plot_characteristic_histogram()
-    # plot_difference_characteristic_histogram()
-    # char_violin_plot()
-    # plot_char_vs_pop()
-    # smoothed_char_vs_pop()
-    # r_value_char_bar()
+    create_characteristic_vs_time()
+    create_box_characteristic_vs_time()
+    plot_characteristic_histogram()
+    plot_difference_characteristic_histogram()
+    char_violin_plot()
+    plot_char_vs_pop()
+    smoothed_char_vs_pop()
+    r_value_char_bar()
+    print('half')
     plot_all_characteristic_of_music()
     # grammy_characteristic_violin_plot()
-    percent_grammy_nominees_with_characteristic_plot()
-    artists_with_most_grammy_nominees()
-    artists_with_most_grammy_wins()
-    follower_count_against_grammy_nominations()
+    # percent_grammy_nominees_with_characteristic_plot()
+    # artists_with_most_grammy_nominees()
+    # artists_with_most_grammy_wins()
+    # follower_count_against_grammy_nominations()
     print('done')
 
 
