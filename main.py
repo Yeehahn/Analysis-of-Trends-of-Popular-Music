@@ -8,6 +8,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import re
 
 
 def create_characteristic_vs_time():
@@ -98,10 +99,11 @@ def plot_all_characteristic_of_music():
     plt.legend(['Acousticness', 'Danceability', 'Energy', 'Instrumentalness',
                 'Liveness', 'Speechiness', 'Valence'], loc='upper right', fontsize='x-small')
     plt.ylim(0, 100)
+    plt.xlabel('Year')
+    plt.ylabel('Characteristic Value')
+    plt.title('All Characteristics of Music Over Time')
     plt.savefig('plots/Q_1/all_char_over_time', bbox_inches='tight')
     plt.clf()
-    
-    
 
 
 def plot_characteristic_histogram():
@@ -285,6 +287,7 @@ def r_value_char_bar():
     plt.savefig('plots/Q_2/r_popularity_vs_characteristics', bbox_inches='tight')
     plt.clf()
 
+
 def grammy_characteristic_violin_plot():
     '''
     Plots a violin plot comparing each characteristic (acousticness, danceability,
@@ -308,7 +311,7 @@ def grammy_characteristic_violin_plot():
     df = pd.concat([df_grammy[necessary_columns], df_pop[necessary_columns]])
     melted_df = pd.melt(df, id_vars='label', value_vars=relevant_columns,
                         var_name='Characteristic', value_name='Value')
-    
+
     sns.violinplot(x='Characteristic', y='Value', hue='label',
                    data=melted_df, inner='quartile')
     plt.title('Characteristics of Grammy Nominees vs. Popular Music')
@@ -318,6 +321,7 @@ def grammy_characteristic_violin_plot():
     plt.xticks(rotation=45)
     plt.savefig('plots/Q_3/grammy_characteristic_violin_plot', bbox_inches='tight')
     plt.clf()
+
 
 def percent_grammy_nominees_with_characteristic_plot():
     '''
@@ -355,12 +359,14 @@ def artists_with_most_grammy_nominees():
     Plots a bar chart that plots the top 5 artists with the most grammy nominees
     against the number of times the artist was nominated
     '''
-    df = pd.read_csv('data_organized/grammy_song_char.csv')
-    df = df.dropna(subset=['artists'])
+    df = pd.read_csv('data_organized/grammy_award_data.csv')
+    df = df.dropna(subset=['artist'])
 
     # Splits 'artists' column into different artists and separates into separate rows
-    df = df.assign(artist=df['artists'].str.split(r'\s*[&,]\s*|\s+and\s+')
-                   ).explode('artist')
+    df['artist'] = df['artist'].apply(clean_artist)
+    # df = df.assign(artist=df['artist'].str.split(r'\s*[&,]\s*|\s+and\s+')
+                   # ).explode('artist')
+    df = df.explode('artist')
     df['artist'] = df['artist'].str.strip()
 
     count = df['artist'].value_counts()
@@ -373,6 +379,27 @@ def artists_with_most_grammy_nominees():
     plt.xticks(rotation=45)
     plt.savefig('plots/Q_4/grammy_nominee_artists', bbox_inches='tight')
     plt.clf()
+
+
+def clean_artist(artist):
+    role_words = {'engineer', 'conductor', 'songwriters', 'composer', 'vocals', 'arranger', 
+                  'various artists', 'artists', 'soloist', 'producer', 'songwriter', 'art director',
+                  'note writer', 'artist', 'album notes writer', 'art directors', 'engineers', 'engineer',
+                  'mastering engineer', 'producers', 'composers', 'arrangers', 'remixer', 'soloists', 
+                  'mastering engineers'}
+    in_paren = re.findall(r'\(([^)]*)\)', artist)
+    out_paren = re.sub(r'\([^)]*\)', '', artist)
+    combined = ' & '.join([out_paren] + in_paren)
+
+    raw_names = re.split(r'\s*[&,]\s*|\s+and\s+', combined)
+
+    cleaned = set()
+    for name in raw_names:
+        name = name.strip()
+        if name and name.lower() not in role_words:
+            cleaned.add(name)
+    return list(cleaned)
+
 
 def artists_with_most_grammy_wins():
     '''
@@ -406,11 +433,11 @@ def follower_count_against_grammy_nominations():
     '''
     Plots a scatter plot of follower count against grammy nominations for various artists
     '''
-    df_nom = pd.read_csv('data_organized/grammy_song_char.csv')
+    df_nom = pd.read_csv('data_organized/grammy_award_data.csv')
     df_art = pd.read_csv('data_organized/artists.csv')
 
-    df_nom = df_nom.dropna(subset=['artists']
-                ).assign(artist=df_nom['artists'].str.split(r'\s*[&,]\s*|\s+and\s+')
+    df_nom = df_nom.dropna(subset=['artist']
+                ).assign(artist=df_nom['artist'].str.split(r'\s*[&,]\s*|\s+and\s+')
                 ).explode('artist')
     df_nom['artist'] = df_nom['artist'].str.strip()
     counts = df_nom['artist'].value_counts().reset_index()
@@ -432,6 +459,7 @@ def follower_count_against_grammy_nominations():
     plt.savefig('plots/Q_4/grammy_follower_counts', bbox_inches='tight')
     plt.clf()
 
+
 def main():
     # create_characteristic_vs_time()
     # create_box_characteristic_vs_time()
@@ -441,12 +469,12 @@ def main():
     # plot_char_vs_pop()
     # smoothed_char_vs_pop()
     # r_value_char_bar()
-    #plot_all_characteristic_of_music()
-    #grammy_characteristic_violin_plot()
-    #percent_grammy_nominees_with_characteristic_plot()
-    #artists_with_most_grammy_nominees()
-    #artists_with_most_grammy_wins()
-    #follower_count_against_grammy_nominations()
+    plot_all_characteristic_of_music()
+    # grammy_characteristic_violin_plot()
+    percent_grammy_nominees_with_characteristic_plot()
+    artists_with_most_grammy_nominees()
+    artists_with_most_grammy_wins()
+    follower_count_against_grammy_nominations()
     print('done')
 
 
