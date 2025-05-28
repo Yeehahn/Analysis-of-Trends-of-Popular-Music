@@ -51,11 +51,18 @@ There were four raw datasets, artists.csv, data_by_genres.csv, grammy_award_data
 To verify and qualify the correlation found here we used Pandas method df.corr(method=’pearson’) to calculate the r-value of each characteristic. The correlation method was done on a non-averaged/non-grouped dataset. This allows for accurate calculations whereas if we computed the r-values with the grouped version shown in the characteristic vs. popularity graph it would have unnaturaly high values. The results can be seen below:
 
 Acousticness -0.573162
+
 Danceability  0.199606
+
 Energy  0.485005
+
 Instrumentalness -0.296750
+
 Liveness -0.076464
+
 Speechiness -0.171979
+
 Valence  0.014200
+
 
 While there are no characteristics with extremely strong correlation coefficients (r-values > 0.7), acousticness and energy have moderately strong correlations. Suggesting more electric or less acoustic music and more energetic music is typically a differing factor between popular music and unpopular music. 
