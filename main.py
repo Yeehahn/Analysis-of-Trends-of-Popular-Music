@@ -8,7 +8,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
-import re
+from prepocess_data import list_eval
 
 
 def create_characteristic_vs_time():
@@ -26,7 +26,7 @@ def create_characteristic_vs_time():
 
     characteristic_100_range = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                                 'liveness', 'speechiness', 'valence']
-    characteristic_not_100_range = ['duration_ms', 'loudness', 'tempo']
+    characteristic_not_100_range = ['duration_s', 'loudness', 'tempo']
 
     for characteristic in characteristic_100_range:
         sns.regplot(x=spot_df.index, y=characteristic, data=spot_df)
@@ -53,7 +53,7 @@ def create_box_characteristic_vs_time():
     spot_df = load_spot_df_for_char()
     characteristic_100_range = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                                 'liveness', 'speechiness', 'valence']
-    characteristic_not_100_range = ['duration_ms', 'loudness', 'tempo']
+    characteristic_not_100_range = ['duration_s', 'loudness', 'tempo']
 
     for characteristic in characteristic_100_range:
         sns.boxplot(x='decade', y=characteristic, data=spot_df, showfliers=False)
@@ -84,12 +84,17 @@ def adjust_plot_characteristic(characteristic, folder_path, title):
 
 
 def plot_all_characteristic_of_music():
+    '''
+    Plots the average value of every characteristic in the 100 range
+    (acousticness, danceability, instrumentalness, valence, liveness, speechiness)
+    over time
+    '''
     sns.set()
     spot_df = pd.read_csv('data_organized/spotify_dataset.csv')
     spot_df = spot_df[['acousticness', 'danceability', 'energy', 'instrumentalness',
                        'liveness', 'speechiness', 'valence', 'year']]
     char_col = ['acousticness', 'danceability', 'energy', 'instrumentalness',
-                       'liveness', 'speechiness', 'valence']
+                'liveness', 'speechiness', 'valence']
     for char in char_col:
         # Smoothing the values so the graph is easier to read
         spot_df[char] = spot_df[char].rolling(window=5).mean()
@@ -123,7 +128,6 @@ def plot_characteristic_histogram():
     bar_width = 0.1
     fig, ax = plt.subplots(figsize=(14, 6))
 
-
     # Since this plot plots the x-axis as decades but it needs to be separated by characteristics
     # Have to manually place bars onto the plot and then set them with a legend
     for i, char in enumerate(characteristic_100_range):
@@ -153,7 +157,7 @@ def plot_difference_characteristic_histogram():
     spot_df = spot_df[(spot_df['decade'] >= 1990) & (spot_df['decade'] < 2020)]
     characteristic_100_range = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                                 'liveness', 'speechiness', 'valence']
-    
+
     unpop_df = pd.read_csv('data_organized/unpopular_music.csv')
     unpop_df = unpop_df.drop(['name', 'artists'], axis=1)
     unpop_df['decade'] = unpop_df['year'].floordiv(10).mul(10)
@@ -222,6 +226,12 @@ def char_violin_plot():
 
 
 def smoothed_char_vs_pop():
+    '''
+    Plots the characteristics 
+    (acousticness, danceability, instrumentalness, valence, liveness, speechiness)
+    against time
+    Smooths out the characteristics since there are sharp spikes and general trends can be found
+    '''
     spot_df = load_spot_df_for_char()
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                         'liveness', 'speechiness', 'valence', 'popularity']
@@ -244,6 +254,9 @@ def smoothed_char_vs_pop():
 
 def plot_char_vs_pop():
     '''
+    Plots the characteristics 
+    (acousticness, danceability, instrumentalness, valence, liveness, speechiness)
+    against time
     '''
     spot_df = load_spot_df_for_char()
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
@@ -263,6 +276,10 @@ def plot_char_vs_pop():
 
 
 def r_value_char_bar():
+    '''
+    Plots a bar chart that represents the r-value from the characteristic vs popularity plot
+    characteristics are (acousticness, danceability, instrumentalness, valence, liveness, speechiness)
+    '''
     spot_df = load_spot_df_for_char()
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                         'liveness', 'speechiness', 'valence', 'popularity']
@@ -293,15 +310,12 @@ def grammy_characteristic_violin_plot():
     general popular music
     '''
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
-                    'liveness', 'speechiness', 'valence']
+                        'liveness', 'speechiness', 'valence']
     df_grammy = pd.read_csv('data_organized/grammy_song_char.csv')
     df_pop = pd.read_csv('data_organized/spotify_dataset.csv')
-
-    # Normalize columns
-    df_grammy[relevant_columns] = df_grammy[relevant_columns] / 10000
-    df_pop[relevant_columns] = df_pop[relevant_columns] / 100
-
-    df_grammy = df_grammy.drop_duplicates(subset=['name', 'artists'])
+    df_grammy = df_grammy.drop_duplicates(subset=['name', 'artist'])
+    # Need artist to be called artists for later
+    df_grammy = df_grammy.rename(columns={'artist': 'artists'})
     df_grammy['label'] = 'Grammy Winners'
     df_pop['label'] = 'Popular Music'
 
@@ -317,6 +331,7 @@ def grammy_characteristic_violin_plot():
     plt.ylabel('Value')
     plt.legend(title='label')
     plt.xticks(rotation=45)
+    plt.ylim(0, 100)
     plt.savefig('plots/Q_3/grammy_characteristic_violin_plot', bbox_inches='tight')
     plt.clf()
 
@@ -329,9 +344,9 @@ def percent_grammy_nominees_with_characteristic_plot():
     '''
     df = pd.read_csv('data_organized/grammy_song_char.csv')
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
-                    'liveness', 'speechiness', 'valence']
-    df[relevant_columns] = df[relevant_columns] / 10000
-    df = df.drop_duplicates(subset=['name', 'artists'])
+                        'liveness', 'speechiness', 'valence']
+    df[relevant_columns] = df[relevant_columns] / 100
+    df = df.drop_duplicates(subset=['name', 'artist'])
     threshold = 0.64
     # Calculate percentage of songs above threshold for each characteristic
     high_scores = {
@@ -341,7 +356,7 @@ def percent_grammy_nominees_with_characteristic_plot():
 
     df_scores = pd.DataFrame({'Characteristic': list(high_scores.keys()),
                               'Percentage': list(high_scores.values())})
-    
+
     sns.barplot(x='Characteristic', y='Percentage', data=df_scores)
     plt.title('Percentage of Grammy Nominees with High Characteristic Scores')
     plt.xlabel('Characteristic')
@@ -357,16 +372,14 @@ def artists_with_most_grammy_nominees():
     Plots a bar chart that plots the top 5 artists with the most grammy nominees
     against the number of times the artist was nominated
     '''
-    df = pd.read_csv('data_organized/grammy_award_data.csv')
+    df = pd.read_csv('data_organized/grammy_award_data.csv', converters={'artist': list_eval})
     df = df.dropna(subset=['artist'])
 
     # Splits 'artists' column into different artists and separates into separate rows
-    df['artist'] = df['artist'].apply(clean_artist)
-    # df = df.assign(artist=df['artist'].str.split(r'\s*[&,]\s*|\s+and\s+')
-                   # ).explode('artist')
     df = df.explode('artist')
     df['artist'] = df['artist'].str.strip()
-
+    # Nan start forming again so drop them again
+    df = df.dropna(subset=['artist'])
     count = df['artist'].value_counts()
     top = count.head(5)
 
@@ -384,15 +397,14 @@ def artists_with_most_grammy_wins():
     Plots a bar chart that plots the top 5 artists with the most grammy wins
     against the number of times the artist was won
     '''
-    df = pd.read_csv('data_organized/grammy_award_data.csv')
+    df = pd.read_csv('data_organized/grammy_award_data.csv', converters={'artist': list_eval})
 
+    # Flake 8 raises an error but the error raised is wrong
+    # == is correct, not is
     df = df[df['winner'] == True].dropna(subset=['artist'])
     # Splits 'artists' column into different artists and separates into separate rows
-    df = df.assign(artist=df['artist'].str.split(r'\s*[&,]\s*|\s+and\s+')
-                ).explode('artist')
+    df = df.explode('artist')
     df['artist'] = df['artist'].str.strip()
-
-    df = df[~df['artist'].str.contains('Various', case=False)]
     top5 = df['artist'].value_counts().head(5)
 
     top5 = top5.reset_index()
@@ -411,12 +423,10 @@ def follower_count_against_grammy_nominations():
     '''
     Plots a scatter plot of follower count against grammy nominations for various artists
     '''
-    df_nom = pd.read_csv('data_organized/grammy_award_data.csv')
+    df_nom = pd.read_csv('data_organized/grammy_award_data.csv', converters={'artist': list_eval})
     df_art = pd.read_csv('data_organized/artists.csv')
 
-    df_nom = df_nom.dropna(subset=['artist']
-                ).assign(artist=df_nom['artist'].str.split(r'\s*[&,]\s*|\s+and\s+')
-                ).explode('artist')
+    df_nom = df_nom.dropna(subset=['artist']).explode('artist')
     df_nom['artist'] = df_nom['artist'].str.strip()
     counts = df_nom['artist'].value_counts().reset_index()
     counts.columns = ['artist', 'nominations']
@@ -447,13 +457,12 @@ def main():
     plot_char_vs_pop()
     smoothed_char_vs_pop()
     r_value_char_bar()
-    print('half')
     plot_all_characteristic_of_music()
-    # grammy_characteristic_violin_plot()
-    # percent_grammy_nominees_with_characteristic_plot()
-    # artists_with_most_grammy_nominees()
-    # artists_with_most_grammy_wins()
-    # follower_count_against_grammy_nominations()
+    grammy_characteristic_violin_plot()
+    percent_grammy_nominees_with_characteristic_plot()
+    artists_with_most_grammy_nominees()
+    artists_with_most_grammy_wins()
+    follower_count_against_grammy_nominations()
     print('done')
 
 
