@@ -263,7 +263,7 @@ def multiply_characteristics_100(df):
     Visually a scale from 0.0 to 1.0 is not as appealing as a scale from 0 to 100
     Scales all of the values that go from 0.0 to 1.0 to go from 0 to 100
     '''
-    characteristics = ['acousticness', 'danceability', 'energy', 'instrumentalness', 'liveness', 'loudness',
+    characteristics = ['acousticness', 'danceability', 'energy', 'instrumentalness', 'liveness',
                        'speechiness', 'valence']
     df[characteristics] = df[characteristics] * 100
     return df

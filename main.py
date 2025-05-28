@@ -245,7 +245,7 @@ def smoothed_char_vs_pop():
     plt.ylim(0, 100)
     plt.legend(['Acousticness', 'Danceability', 'Energy', 'Instrumentalness',
                 'Liveness', 'Speechiness', 'Valence'], loc='upper right', fontsize='x-small')
-    plt.title('Popularity Vs. Characteristic Value')
+    plt.title('Change in Characteristic Vs Popularity')
     plt.ylabel('Average Values')
     plt.xlabel('Popualrity')
     plt.savefig('plots/Q_2/Smoothed_Popularity_vs_characteristic')
@@ -284,17 +284,16 @@ def r_value_char_bar():
     relevant_columns = ['acousticness', 'danceability', 'energy', 'instrumentalness',
                         'liveness', 'speechiness', 'valence', 'popularity']
     spot_df = spot_df[relevant_columns]
-    spot_df = spot_df.groupby('popularity').mean().reset_index()
     correlations = spot_df.corr(method='pearson')
-    r_sq_values = pd.DataFrame({'characteristic': [], 
+    r_values = pd.DataFrame({'characteristic': [], 
                                 'value': []})
     relevant_columns.remove('popularity')
 
     for i, char in enumerate(relevant_columns):
         r_val = correlations.loc['popularity', char]
-        r_sq_values.loc[i] = {'characteristic': char.capitalize(), 'value': r_val}
-
-    sns.barplot(r_sq_values, x='characteristic', y='value')
+        r_values.loc[i] = {'characteristic': char.capitalize(), 'value': r_val}
+    print(r_values)
+    sns.barplot(r_values, x='characteristic', y='value')
     plt.xlabel('Characteristics')
     plt.xticks(rotation=30)
     plt.ylabel('r Values')
