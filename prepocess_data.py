@@ -217,7 +217,7 @@ def grammy_songs_characteristics():
     Saves the dataset to data_organized as grammy_song_characteristics.csv
     '''
     grammy = pd.read_csv('data_organized/grammy_award_data.csv', converters={'artist': list_eval})
-    grammy = grammy[['category', 'nominee', 'artist', 'workers']]
+    grammy = grammy[['year', 'category', 'nominee', 'artist', 'workers']]
     no_records_albums = grammy['category'].apply(lambda x: 'Album' not in x and 
                                                  'Record' not in x)
     grammy = grammy[no_records_albums]
@@ -226,15 +226,14 @@ def grammy_songs_characteristics():
                                   converters={'artists': ast.literal_eval})
     # Normalizing names
     grammy['nominee_clean'] = grammy['nominee'].str.lower().str.strip()
-    grammy['artist_clean'] = grammy['artist'].apply(sorted).apply(str)
+    grammy['year_1'] = grammy['year'] - 1
     spotify_dataset['spotify_name_clean'] = spotify_dataset['name'].str.lower().str.strip()
-    spotify_dataset['spotify_artist_clean'] = spotify_dataset['artists'].apply(sorted).apply(str)
 
-    grammy_song = grammy.merge(spotify_dataset, left_on=['nominee_clean', 'artist_clean'], 
-                               right_on=['spotify_name_clean', 'spotify_artist_clean'], how='inner')
+    grammy_song = grammy.merge(spotify_dataset, left_on=['nominee_clean', 'year_1'], 
+                               right_on=['spotify_name_clean', 'year'], how='inner')
     # These columns are just repeat of other the name and year column
-    grammy_song = grammy_song.drop(['spotify_name_clean', 'spotify_artist_clean', 'artists',
-                                    'artist_clean', 'nominee_clean'], 
+    grammy_song = grammy_song.drop(['spotify_name_clean', 'artists',
+                                    'nominee_clean', 'year_1'], 
                                    axis=1)
     grammy_song.to_csv('data_organized/grammy_song_char.csv', sep=',', index=False, encoding='utf-8')
 
