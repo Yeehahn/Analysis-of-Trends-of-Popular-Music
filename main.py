@@ -286,7 +286,7 @@ def r_value_char_bar():
     spot_df = spot_df[relevant_columns]
     correlations = spot_df.corr(method='pearson')
     r_values = pd.DataFrame({'characteristic': [], 
-                                'value': []})
+                             'value': []})
     relevant_columns.remove('popularity')
 
     for i, char in enumerate(relevant_columns):
