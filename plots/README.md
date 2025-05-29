@@ -1,6 +1,3 @@
-All of your generated plots need to be saved here. It should contain only images.
-
-
 **Explanation of Plots:**
 This folder contains all generated plots and sketches for said plots.
 Each question posed in the discovery document is answered by or responded to by the plots in its corresponding folder (Q_1 represents plots corresponding to question 1).
