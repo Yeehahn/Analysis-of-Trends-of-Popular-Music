@@ -99,6 +99,7 @@ Results are not independent because sometimes singular pieces of music (albums o
 All category values greater than 5.
 
 **Results:**
+
 We will set our alpha-level = 0.05 as this is standard.
 
 Worse: χ² = 32.167 p < 0.00001
